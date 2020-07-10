@@ -2,6 +2,7 @@ package com.yovya;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * @author: omnifocus
@@ -10,7 +11,7 @@ import java.awt.*;
  * @version: 1.0
  */
 public class Bullet {
-    private int x = 50, y = 50, width = 50, height = 50;
+    private int x = 50, y = 50, width = 12, height = 12;
     private final int SPEED = 10;
     private Direction dir = Direction.DOWN;
     private TankFrame tf;
@@ -40,26 +41,35 @@ public class Bullet {
             this.tf.getBullets().remove(this);
             return;
         }
+
+        //because the pictures not very ok, calculates every one each time
+        BufferedImage image = null;
         switch (dir) {
             case UP:
                 y -= SPEED;
+                image = ResourceMgr.bulletU;
                 break;
             case DOWN:
                 y += SPEED;
+                image = ResourceMgr.bulletD;
                 break;
             case LEFT:
                 x -= SPEED;
+                image = ResourceMgr.bulletL;
                 break;
             case RIGHT:
                 x += SPEED;
+                image = ResourceMgr.bulletR;
                 break;
         }
-        Color c = g.getColor();
-        g.setColor(Color.RED);
+        g.drawImage(image,x, y,null);
+//        Color c = g.getColor();
+//        g.setColor(Color.RED);
+//
+//        g.fillOval(x, y, width, height);
+//
+//        g.setColor(c);
 
-        g.fillOval(x, y, width, height);
-
-        g.setColor(c);
 
         if (x <0 || x> TankFrame.GAME_WIDTH || y <0 || y> TankFrame.GAME_HEIGHT) {
             alive = false;

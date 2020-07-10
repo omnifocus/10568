@@ -1,7 +1,7 @@
 package com.yovya;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 /**
  * @author: omnifocus
@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
  */
 public class Tank {
     int x = 50, y = 50;
-    int width=100, height=100;
+    int width = 50, height = 50;
     Direction dir = Direction.UP;
     final int SPEED = 10;
     // default state is not moving
@@ -28,10 +28,11 @@ public class Tank {
         this.tf = tf;
     }
 
-    public Tank(int x, int y, Direction dir) {
+    public Tank(int x, int y, Direction dir,TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public void paint(Graphics g) {
@@ -43,24 +44,27 @@ public class Tank {
         if (moving)
             move();
 
-
-        g.drawImage(ResourceMgr.imageU, x, y, null);
+        g.drawImage(getTankImage(), x, y, null);
     }
 
 
     private void move() {
+
         switch (dir) {
             case UP:
                 y -= SPEED;
                 break;
             case DOWN:
                 y += SPEED;
+
                 break;
             case LEFT:
                 x -= SPEED;
+
                 break;
             case RIGHT:
                 x += SPEED;
+
                 break;
         }
     }
@@ -85,14 +89,14 @@ public class Tank {
         /**
          * show a bullet from tank
          */
-        this.tf.getBullets().add(new Bullet(x, y, dir, tf));
+        BufferedImage tankImg = getTankImage();
+        BufferedImage bulletImg = getBulletImage();
+        this.tf.getBullets().add(new Bullet(x+tankImg.getWidth()/2-bulletImg.getWidth()/2,y + tankImg.getHeight()/2, dir, tf));
     }
 
 
-
-
     public Rectangle getRectange() {
-        return new Rectangle(x,y,width,height);
+        return new Rectangle(x, y, width, height);
     }
 
     public boolean isAlive() {
@@ -101,6 +105,52 @@ public class Tank {
 
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+
+    private BufferedImage getTankImage() {
+        BufferedImage image = null;
+        switch (dir) {
+            case UP:
+                image = ResourceMgr.tankU;
+                break;
+            case DOWN:
+                image = ResourceMgr.tankD;
+
+                break;
+            case LEFT:
+                image = ResourceMgr.tankL;
+
+                break;
+            case RIGHT:
+                image = ResourceMgr.tankR;
+
+                break;
+
+        }
+        return image;
+    }
+
+    private BufferedImage getBulletImage() {
+        BufferedImage image = null;
+        switch (dir) {
+            case UP:
+                image = ResourceMgr.bulletU;
+                break;
+            case DOWN:
+                image = ResourceMgr.bulletD;
+
+                break;
+            case LEFT:
+                image = ResourceMgr.bulletL;
+
+                break;
+            case RIGHT:
+                image = ResourceMgr.bulletR;
+
+                break;
+
+        }
+        return image;
     }
 }
 
