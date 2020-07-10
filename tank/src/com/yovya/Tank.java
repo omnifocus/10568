@@ -11,12 +11,13 @@ import java.awt.event.KeyEvent;
  */
 public class Tank {
     int x = 50, y = 50;
-    int width, height;
+    int width=100, height=100;
     Direction dir = Direction.UP;
     final int SPEED = 10;
     // default state is not moving
     private boolean moving;
     private TankFrame tf;
+    private boolean alive = true;
 
     public Tank(int x, int y, int width, int height, Direction dir, TankFrame tf) {
         this.x = x;
@@ -27,8 +28,17 @@ public class Tank {
         this.tf = tf;
     }
 
+    public Tank(int x, int y, Direction dir) {
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
+    }
 
     public void paint(Graphics g) {
+        if (!alive) {
+            this.tf.getEnemies().remove(this);
+            return;
+        }
         // if moving , then redraw
         if (moving)
             move();
@@ -76,6 +86,21 @@ public class Tank {
          * show a bullet from tank
          */
         this.tf.getBullets().add(new Bullet(x, y, dir, tf));
+    }
+
+
+
+
+    public Rectangle getRectange() {
+        return new Rectangle(x,y,width,height);
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 }
 

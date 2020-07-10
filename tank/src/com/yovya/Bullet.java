@@ -65,4 +65,23 @@ public class Bullet {
             alive = false;
         }
     }
+
+    public void hitTank(Tank enemy) {
+        if ( this.getRectange().intersects(enemy.getRectange()) ) {
+            this.alive = false;
+            enemy.setAlive(false);
+        }
+    }
+
+    public Rectangle getRectange() {
+        return new Rectangle(x,y,width,height);
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
 }
