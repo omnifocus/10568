@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -19,12 +20,19 @@ public class TankFrame extends Frame {
     private Tank mainTank;
     // add a list of bullets
     private ArrayList<Bullet> bullets;
+    private ArrayList<Tank> enemies;
+
 
 
 
     public TankFrame() throws HeadlessException {
-        mainTank = new Tank(300, 200, 100, 100, Direction.UP,this);
+        mainTank = new Tank(300, 400, 100, 100, Direction.UP,this);
         bullets = new ArrayList<>();
+        enemies = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            enemies.add(new Tank(30 + i*130,100,Direction.UP));
+        }
+
         setTitle("tank war");
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
@@ -103,6 +111,7 @@ public class TankFrame extends Frame {
         Color c = Color.WHITE;
         g.setColor(c);
         g.drawString("current bullets: " + bullets.size(), 20,40);
+        g.drawString("current enemies: " + enemies.size(), 20,60);
         g.setColor(origin);
 
         /* paint : a tank knows exactly how to paint itself*/
@@ -114,7 +123,13 @@ public class TankFrame extends Frame {
 //        }
 
         for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).paint(g);
+            Bullet bullet = bullets.get(i);
+            bullet.paint(g);
+        }
+
+        for (int i = 0; i < enemies.size(); i++) {
+            Tank enemy = enemies.get(i);
+            enemy.paint(g);
         }
     }
 
@@ -142,5 +157,13 @@ public class TankFrame extends Frame {
 
     public void setBullets(ArrayList<Bullet> bullets) {
         this.bullets = bullets;
+    }
+
+    public ArrayList<Tank> getEnemies() {
+        return enemies;
+    }
+
+    public void setEnemies(ArrayList<Tank> enemies) {
+        this.enemies = enemies;
     }
 }
