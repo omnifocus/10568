@@ -13,17 +13,7 @@ import java.awt.event.WindowListener;
  */
 public class T {
     public static void main(String[] args) {
-        Frame frame  = new Frame();
-        frame.setTitle("tank war");
-        frame.setSize(800,600);
-        frame.setVisible(true);
+        TankFrame tf = new TankFrame();
 
-        // monitor close button
-        frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
     }
 }

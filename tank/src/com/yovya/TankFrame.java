@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
  * @version: 1.0
  */
 public class TankFrame extends Frame {
-
+    int x=50 ,y=50;
     public TankFrame() throws HeadlessException {
 
         setTitle("tank war");
@@ -27,9 +27,17 @@ public class TankFrame extends Frame {
         });
     }
 
+    /**
+     * when minimize and resotre the frame, this method will be invoked!
+     * @param g
+     */
     @Override
     public void paint(Graphics g) {
-        g.fillRect(100,100,100,50);
+        g.fillRect(x,y,100,50);
+        x += 50;
+        y += 50;
+
+        System.out.println("TankFrame.paint");
     }
 
 }
