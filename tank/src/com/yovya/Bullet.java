@@ -9,7 +9,7 @@ import java.awt.*;
  * @version: 1.0
  */
 public class Bullet {
-    private int x=50, y=50,width=50,height=50;
+    private int x = 50, y = 50, width = 50, height = 50;
     private final int SPEED = 10;
     private Direction dir = Direction.DOWN;
 
@@ -41,7 +41,7 @@ public class Bullet {
         Color c = g.getColor();
         g.setColor(Color.RED);
 
-        g.fillOval(x,y,width,height);
+        g.fillOval(x, y, width, height);
 
         g.setColor(c);
     }

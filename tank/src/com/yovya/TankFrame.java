@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
  * @version: 1.0
  */
 public class TankFrame extends Frame {
-
+    public final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     private Tank mainTank;
     // add a bullet
     private Bullet bullet;
@@ -22,7 +22,7 @@ public class TankFrame extends Frame {
         mainTank = new Tank(300, 200, 100, 100, Direction.UP);
         bullet = new Bullet();
         setTitle("tank war");
-        setSize(800, 600);
+        setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
         setVisible(true);
 
@@ -96,4 +96,21 @@ public class TankFrame extends Frame {
         bullet.paint(g);
     }
 
+    /* double buffer to eliminate flicking */
+    Image offScreenImage = null;
+
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        paint(gOffScreen);
+        gOffScreen.setColor(c);
+        g.drawImage(offScreenImage, 0, 0, null);
+
+    }
 }

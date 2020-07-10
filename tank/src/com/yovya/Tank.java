@@ -31,8 +31,10 @@ public class Tank {
         if (moving)
             move();
 
-
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
         g.fillRect(x, y, width, height);
+        g.setColor(c);
     }
 
 
