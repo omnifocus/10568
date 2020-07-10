@@ -19,7 +19,7 @@ public class TankFrame extends Frame {
     private Bullet bullet;
 
     public TankFrame() throws HeadlessException {
-        mainTank = new Tank(300, 200, 100, 100, Direction.UP);
+        mainTank = new Tank(300, 200, 100, 100, Direction.UP,this);
         bullet = new Bullet();
         setTitle("tank war");
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -74,6 +74,10 @@ public class TankFrame extends Frame {
                     case KeyEvent.VK_RIGHT:
                         mainTank.setMoving(false);
                         break;
+
+                    case KeyEvent.VK_CONTROL:
+                        mainTank.fire();
+                        break;
                 }
             }
 
@@ -112,5 +116,13 @@ public class TankFrame extends Frame {
         gOffScreen.setColor(c);
         g.drawImage(offScreenImage, 0, 0, null);
 
+    }
+
+    public Bullet getBullet() {
+        return bullet;
+    }
+
+    public void setBullet(Bullet bullet) {
+        this.bullet = bullet;
     }
 }

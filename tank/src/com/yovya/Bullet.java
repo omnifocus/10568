@@ -20,6 +20,12 @@ public class Bullet {
         this.height = height;
     }
 
+    public Bullet(int x, int y,Direction dir) {
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
+    }
+
     public Bullet() {
     }
 

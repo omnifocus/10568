@@ -16,13 +16,15 @@ public class Tank {
     final int SPEED = 10;
     // default state is not moving
     private boolean moving;
+    private TankFrame tf;
 
-    public Tank(int x, int y, int width, int height, Direction dir) {
+    public Tank(int x, int y, int width, int height, Direction dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.dir = dir;
+        this.tf = tf;
     }
 
 
@@ -69,6 +71,13 @@ public class Tank {
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+    }
+
+    public void fire() {
+        /**
+         * show a bullet from tank
+         */
+        this.tf.setBullet(new Bullet(x,y,dir));
     }
 }
 
