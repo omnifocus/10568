@@ -7,5 +7,5 @@ package com.yovya;
  * @version: 1.0
  */
 public enum Direction {
-    UP,DOWN,LEFT,RIGHT
+    UP, DOWN, LEFT, RIGHT
 }
