@@ -23,15 +23,10 @@ public class TankFrame extends Frame {
     private ArrayList<Tank> enemies;
 
 
-
-
     public TankFrame() throws HeadlessException {
         mainTank = new Tank(300, 400,  Direction.UP,this);
         bullets = new ArrayList<>();
-        enemies = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            enemies.add(new Tank(30 + i*130,100,Direction.UP,this));
-        }
+
 
         setTitle("tank war");
         setSize(GAME_WIDTH, GAME_HEIGHT);
