@@ -1,6 +1,8 @@
 package com.yovya;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -24,6 +26,20 @@ public class TankFrame extends Frame {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
+        });
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                System.out.println("TankFrame.keyPressed");
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                System.out.println("TankFrame.keyReleased");
+            }
+
+
         });
     }
 
