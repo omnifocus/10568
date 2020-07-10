@@ -13,11 +13,22 @@ import java.awt.event.WindowEvent;
  * @version: 1.0
  */
 public class TankFrame extends Frame {
-    int x=50 ,y=50;
+    int x = 50, y = 50;
+    /*
+        After press two keys, at first ,the computer can detect both,
+       after a while ,the computer can only detect the last key.
+       So these four variables remember the state of the combined keys when
+       the computer detects both
+        */
+    boolean bU = false;
+    boolean bD = false;
+    boolean bL = false;
+    boolean bR = false;
+
     public TankFrame() throws HeadlessException {
 
         setTitle("tank war");
-        setSize(800,600);
+        setSize(800, 600);
         setResizable(false);
         setVisible(true);
 
@@ -32,38 +43,58 @@ public class TankFrame extends Frame {
             @Override
             public void keyPressed(KeyEvent e) {
 
-               switch (e.getKeyCode()) {
-                   case KeyEvent.VK_UP:
-                       y -= 10;
-                       break;
-                   case KeyEvent.VK_DOWN:
-                       y += 10;
-                       break;
-                   case KeyEvent.VK_LEFT:
-                       x -= 10;
-                       break;
-                   case KeyEvent.VK_RIGHT:
-                       x += 10;
-                       break;
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        bU = true;
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        bD = true;
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        bL = true;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        bR = true;
+                        break;
 
-               }
+                }
+
+
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        bU = false;
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        bD = false;
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        bL = false;
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        bR = false;
+                        break;
+
+                }
+
             }
 
 
         });
     }
 
+
     /**
      * when minimize and resotre the frame, this method will be invoked!
+     *
      * @param g
      */
     @Override
     public void paint(Graphics g) {
-        g.fillRect(x,y,100,50);
+        g.fillRect(x, y, 100, 50);
     }
 
 }
