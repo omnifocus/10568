@@ -12,8 +12,13 @@ import java.awt.event.WindowListener;
  * @version: 1.0
  */
 public class T {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
 
+        // refresh automatically every 50ms
+        while (true) {
+            Thread.sleep(50);
+            tf.repaint();
+        }
     }
 }
