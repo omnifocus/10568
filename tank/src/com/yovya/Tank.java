@@ -14,6 +14,8 @@ public class Tank {
     int width, height;
     Direction dir = Direction.UP;
     final int SPEED = 10;
+    // default state is not moving
+    private boolean moving;
 
     public Tank(int x, int y, int width, int height, Direction dir) {
         this.x = x;
@@ -24,8 +26,17 @@ public class Tank {
     }
 
 
-
     public void paint(Graphics g) {
+        // if moving , then redraw
+        if (moving)
+            move();
+
+
+        g.fillRect(x, y, width, height);
+    }
+
+
+    private void move() {
         switch (dir) {
             case UP:
                 y -= SPEED;
@@ -40,7 +51,6 @@ public class Tank {
                 x += SPEED;
                 break;
         }
-        g.fillRect(x, y, width, height);
     }
 
     public Direction getDir() {
@@ -50,4 +60,15 @@ public class Tank {
     public void setDir(Direction dir) {
         this.dir = dir;
     }
+
+    public boolean isMoving() {
+        return moving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
 }
+
+
+

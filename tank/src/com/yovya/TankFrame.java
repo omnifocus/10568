@@ -48,9 +48,33 @@ public class TankFrame extends Frame {
                     case KeyEvent.VK_RIGHT:
                         mainTank.setDir(Direction.RIGHT);
                         break;
+                }
 
+                // only when up down left right pressed, mainTank 's moving is true
+                int selectedKeyCode = e.getKeyCode();
+                if (selectedKeyCode == KeyEvent.VK_UP || selectedKeyCode == KeyEvent.VK_DOWN || selectedKeyCode == KeyEvent.VK_LEFT || selectedKeyCode == KeyEvent.VK_RIGHT) {
+                    mainTank.setMoving(true);
+                }
+
+            }
+
+            // only when up down left right released, mainTank 's moving is false
+            @Override
+            public void keyReleased(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+
+                    case KeyEvent.VK_DOWN:
+
+                    case KeyEvent.VK_LEFT:
+
+                    case KeyEvent.VK_RIGHT:
+                        mainTank.setMoving(false);
+                        break;
                 }
             }
+
+
         });
 
 
