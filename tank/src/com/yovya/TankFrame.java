@@ -119,6 +119,9 @@ public class TankFrame extends Frame {
 
         for (int i = 0; i < bullets.size(); i++) {
             Bullet bullet = bullets.get(i);
+            for (int j=0; j< enemies.size(); j++) {
+                bullet.hitTank(enemies.get(j));
+            }
             bullet.paint(g);
         }
 
