@@ -33,10 +33,8 @@ public class Tank {
         if (moving)
             move();
 
-        Color c = g.getColor();
-        g.setColor(Color.YELLOW);
-        g.fillRect(x, y, width, height);
-        g.setColor(c);
+
+        g.drawImage(ResourceMgr.imageU, x, y, null);
     }
 
 
@@ -77,7 +75,7 @@ public class Tank {
         /**
          * show a bullet from tank
          */
-        this.tf.getBullets().add(new Bullet(x,y,dir,tf));
+        this.tf.getBullets().add(new Bullet(x, y, dir, tf));
     }
 }
 
