@@ -14,6 +14,8 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
     int x = 50, y = 50;
+
+    int speed = 10;
     /*
         After press two keys, at first ,the computer can detect both,
        after a while ,the computer can only detect the last key.
@@ -58,6 +60,7 @@ public class TankFrame extends Frame {
                         break;
 
                 }
+                changeDirection();
 
 
             }
@@ -79,11 +82,44 @@ public class TankFrame extends Frame {
                         break;
 
                 }
+                changeDirection();
 
             }
 
 
         });
+    }
+
+    private void changeDirection() {
+        if (bU) {
+            y -= speed;
+        }
+        if (bU && bL) {
+            y -= speed;
+            x -= speed;
+        }
+        if (bU && bR) {
+            y -= speed;
+            x += speed;
+        }
+        if (bD) {
+            y += speed;
+        }
+        if (bD && bL) {
+            y += speed;
+            x -= speed;
+        }
+        if (bD && bR) {
+            y += speed;
+            x += speed;
+        }
+        if (bL) {
+            x -= speed;
+        }
+        if (bR) {
+            x += speed;
+        }
+
     }
 
 
