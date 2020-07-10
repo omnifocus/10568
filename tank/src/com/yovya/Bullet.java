@@ -1,5 +1,6 @@
 package com.yovya;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -12,24 +13,33 @@ public class Bullet {
     private int x = 50, y = 50, width = 50, height = 50;
     private final int SPEED = 10;
     private Direction dir = Direction.DOWN;
+    private TankFrame tf;
+    private boolean alive = true;
 
-    public Bullet(int x, int y, int width, int height) {
+    public Bullet(int x, int y, int width, int height,TankFrame tf) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.tf = tf;
     }
 
-    public Bullet(int x, int y,Direction dir) {
+    public Bullet(int x, int y,Direction dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public Bullet() {
     }
 
     public void paint(Graphics g) {
+
+        if (!alive) {
+            this.tf.getBullets().remove(this);
+            return;
+        }
         switch (dir) {
             case UP:
                 y -= SPEED;
@@ -50,5 +60,9 @@ public class Bullet {
         g.fillOval(x, y, width, height);
 
         g.setColor(c);
+
+        if (x <0 || x> TankFrame.GAME_WIDTH || y <0 || y> TankFrame.GAME_HEIGHT) {
+            alive = false;
+        }
     }
 }

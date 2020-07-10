@@ -5,6 +5,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * @author: omnifocus
@@ -13,14 +15,16 @@ import java.awt.event.WindowEvent;
  * @version: 1.0
  */
 public class TankFrame extends Frame {
-    public final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     private Tank mainTank;
-    // add a bullet
-    private Bullet bullet;
+    // add a list of bullets
+    private ArrayList<Bullet> bullets;
+
+
 
     public TankFrame() throws HeadlessException {
         mainTank = new Tank(300, 200, 100, 100, Direction.UP,this);
-        bullet = new Bullet();
+        bullets = new ArrayList<>();
         setTitle("tank war");
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
@@ -95,9 +99,23 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
+        Color origin = g.getColor();
+        Color c = Color.WHITE;
+        g.setColor(c);
+        g.drawString("current bullets: " + bullets.size(), 20,40);
+        g.setColor(origin);
+
         /* paint : a tank knows exactly how to paint itself*/
         mainTank.paint(g);
-        bullet.paint(g);
+
+        //java.util.ConcurrentModificationException
+//        for (Bullet bullet : bullets) {
+//            bullet.paint(g);
+//        }
+
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).paint(g);
+        }
     }
 
     /* double buffer to eliminate flicking */
@@ -118,11 +136,11 @@ public class TankFrame extends Frame {
 
     }
 
-    public Bullet getBullet() {
-        return bullet;
+    public Collection<Bullet> getBullets() {
+        return bullets;
     }
 
-    public void setBullet(Bullet bullet) {
-        this.bullet = bullet;
+    public void setBullets(ArrayList<Bullet> bullets) {
+        this.bullets = bullets;
     }
 }

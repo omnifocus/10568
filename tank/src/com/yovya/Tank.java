@@ -77,7 +77,7 @@ public class Tank {
         /**
          * show a bullet from tank
          */
-        this.tf.setBullet(new Bullet(x,y,dir));
+        this.tf.getBullets().add(new Bullet(x,y,dir,tf));
     }
 }
 
