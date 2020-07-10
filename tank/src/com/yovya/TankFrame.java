@@ -15,9 +15,12 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame {
 
     private Tank mainTank;
+    // add a bullet
+    private Bullet bullet;
 
     public TankFrame() throws HeadlessException {
         mainTank = new Tank(300, 200, 100, 100, Direction.UP);
+        bullet = new Bullet();
         setTitle("tank war");
         setSize(800, 600);
         setResizable(false);
@@ -90,6 +93,7 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
         /* paint : a tank knows exactly how to paint itself*/
         mainTank.paint(g);
+        bullet.paint(g);
     }
 
 }
