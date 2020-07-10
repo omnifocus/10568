@@ -152,6 +152,10 @@ public class Tank {
         }
         return image;
     }
+
+    public void die() {
+        this.alive = false;
+    }
 }
 
 

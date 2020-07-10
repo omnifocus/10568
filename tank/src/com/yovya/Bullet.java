@@ -78,9 +78,15 @@ public class Bullet {
 
     public void hitTank(Tank enemy) {
         if ( this.getRectange().intersects(enemy.getRectange()) ) {
-            this.alive = false;
-            enemy.setAlive(false);
+            this.die();
+            //enemy.setAlive(false);
+            //I don't know if there's the field
+            enemy.die();
         }
+    }
+
+    private void die() {
+        this.setAlive(false);
     }
 
     public Rectangle getRectange() {
