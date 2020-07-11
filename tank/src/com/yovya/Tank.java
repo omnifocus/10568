@@ -90,34 +90,29 @@ public class Tank {
         }
     }
 
+    /* no need to change direction , cause changing direction inside every move */
     private void checkBorder() {
-        if (x <= 0) {
-            while (dir == Direction.LEFT) {
-                dir = randomDir();
-            }
+
+        if (x < 0) {
+           x = 0;
         }
-        if (x >= TankFrame.GAME_WIDTH - width) {
-            while (dir == Direction.RIGHT) {
-                dir = randomDir();
-            }
+        if (x > TankFrame.GAME_WIDTH - width) {
+            x = TankFrame.GAME_WIDTH - width;
         }
 
-        if (y <= 20) {
-            while (dir == Direction.UP) {
-                dir = randomDir();
-            }
+        if (y < 20) {
+            y = 20;
         }
 
-        if (y >= TankFrame.GAME_HEIGHT - height) {
-            while (dir == Direction.DOWN) {
-                dir = randomDir();
-            }
+        if (y > TankFrame.GAME_HEIGHT - height) {
+            y = TankFrame.GAME_HEIGHT - height;
         }
     }
 
 
     private void move() {
-
+        // check border inside move
+        checkBorder();
         switch (dir) {
             case UP:
                 y -= SPEED;
