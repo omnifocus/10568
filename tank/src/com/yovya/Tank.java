@@ -14,11 +14,12 @@ public class Tank {
     int x = 50, y = 50;
     int width = ResourceMgr.tankU.getWidth(), height = ResourceMgr.tankU.getHeight();
     Direction dir = Direction.UP;
-    final int SPEED = 10;
-    private boolean moving = true;
+    final int SPEED = 5;
+
     private TankFrame tf;
     private boolean alive = true;
     private Group group = Group.BAD;
+    private boolean moving = true;
 
 
 
@@ -31,6 +32,7 @@ public class Tank {
         this.height = height;
         this.dir = dir;
         this.tf = tf;
+        this.moving = group==Group.BAD?true:false;
     }
 
     public Tank(int x, int y,  Group group, TankFrame tf) {
@@ -39,6 +41,7 @@ public class Tank {
         this.dir = randomDir();
         this.group = group;
         this.tf = tf;
+        this.moving = group==Group.BAD?true:false;
     }
 
 
@@ -54,6 +57,7 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+        this.moving = group==Group.BAD?true:false;
     }
 
     public void paint(Graphics g) {
@@ -72,9 +76,15 @@ public class Tank {
             move();
 
         g.drawImage(getTankImage(), x, y, null);
+        /*
         // time to fire
-        if (random.nextInt(10) > 8) {
-            fire();
+
+         only enemy to fire
+
+         */
+        if (this.group != Group.GOOD) {
+            if (random.nextInt(100) > 98)
+                fire();
         }
     }
 
@@ -123,6 +133,12 @@ public class Tank {
 
                 break;
         }
+
+        // after move, decide next dir
+        // not the mainTank
+        // give it an opportunity to change Direction
+        if (group != Group.GOOD && random.nextInt(100) > 95 )
+             dir = randomDir();
     }
 
     public Direction getDir() {

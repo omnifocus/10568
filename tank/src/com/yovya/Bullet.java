@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 public class Bullet {
     private int x = 50, y = 50;
     public static final int BULLETWIDTH = ResourceMgr.bulletU.getWidth(), BULLETHEIGHT = ResourceMgr.bulletU.getHeight();
-    private final int SPEED = 10;
+    private final int SPEED = 30;
     private Direction dir = Direction.DOWN;
     private TankFrame tf;
     private boolean alive = true;
