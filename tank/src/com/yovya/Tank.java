@@ -1,5 +1,7 @@
 package com.yovya;
 
+import com.yovya.firestrategy.FireStrategyFourDirecionsFire;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -25,13 +27,9 @@ public class Tank {
     // every 3 step change pic
     private int step = 0;
 
-    private Rectangle rectangle ;
+    private Rectangle rectangle;
 
     private Random random = new Random();
-
-
-
-
 
 
     private Direction randomDir() {
@@ -80,7 +78,7 @@ public class Tank {
     private void checkBorder() {
 
         if (x < 0) {
-           x = 0;
+            x = 0;
         }
         if (x > TankFrame.GAME_WIDTH - width) {
             x = TankFrame.GAME_WIDTH - width;
@@ -154,7 +152,10 @@ public class Tank {
 
         // when adding bullet, we have to decide it's the same group as the current Tank
         //this.getGroup()
-        this.tf.getBullets().add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), tf));
+//        this.tf.getBullets().add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), tf));
+
+//        new FireStrategyDefault().fire(tf, this);
+        new FireStrategyFourDirecionsFire().fire(tf, this);
     }
 
 
@@ -227,6 +228,38 @@ public class Tank {
 
     public void setGroup(Group group) {
         this.group = group;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }
 

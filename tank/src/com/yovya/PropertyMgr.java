@@ -1,7 +1,5 @@
 package com.yovya;
 
-import com.design.Singletonv3;
-
 import java.io.IOException;
 import java.util.Properties;
 
