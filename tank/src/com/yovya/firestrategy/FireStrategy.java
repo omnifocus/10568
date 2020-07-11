@@ -1,7 +1,7 @@
 package com.yovya.firestrategy;
 
+import com.yovya.Audio;
 import com.yovya.Tank;
-import com.yovya.TankFrame;
 
 /**
  * @author: omnifocus
@@ -11,5 +11,14 @@ import com.yovya.TankFrame;
  */
 public interface FireStrategy {
 
-    void fire(TankFrame tf, Tank tank);
+    void fire(Tank tank);
+
+    // inside Father, implements a method to play music
+    default void playMusic() {
+        new Thread(() -> {
+            new Audio("audio/tank_fire.wav").play();
+        }).start();
+    }
+
+
 }

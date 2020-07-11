@@ -1,6 +1,5 @@
 package com.yovya;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -23,14 +22,16 @@ public class Bullet {
 
 
 
+
     public Bullet(int x, int y, Direction dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
         this.tf = tf;
-        this.rectangle = new Rectangle(x,y,BULLETWIDTH,BULLETHEIGHT);
-
+        this.rectangle = new Rectangle(x, y, BULLETWIDTH, BULLETHEIGHT);
+        // automatically add to frame's bullets after created
+        this.tf.getBullets().add(this);
     }
 
     public Bullet() {

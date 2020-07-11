@@ -1,9 +1,11 @@
 package com.yovya;
 
-import com.yovya.firestrategy.FireStrategyFourDirecionsFire;
+import com.yovya.firestrategy.FireStrategy;
+import com.yovya.firestrategy.FireStrategyDefault;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 /**
@@ -14,7 +16,7 @@ import java.util.Random;
  */
 public class Tank {
     int x = 50, y = 50;
-    int width = ResourceMgr.mainTankU.getWidth(), height = ResourceMgr.mainTankU.getHeight();
+    public static int WIDTH = ResourceMgr.mainTankU.getWidth(), HEIGHT = ResourceMgr.mainTankU.getHeight();
     Direction dir = Direction.UP;
     final int SPEED = 5;
 
@@ -45,7 +47,7 @@ public class Tank {
         this.group = group;
         this.tf = tf;
         this.moving = group == Group.BAD ? true : false;
-        this.rectangle = new Rectangle(x, y, width, height);
+        this.rectangle = new Rectangle(x, y, WIDTH, HEIGHT);
     }
 
     public void paint(Graphics g) {
@@ -70,7 +72,7 @@ public class Tank {
          */
         if (this.group != Group.GOOD) {
             if (random.nextInt(100) > 98)
-                fire();
+                fire(FireStrategyDefault.getInstance());
         }
     }
 
@@ -80,16 +82,16 @@ public class Tank {
         if (x < 0) {
             x = 0;
         }
-        if (x > TankFrame.GAME_WIDTH - width) {
-            x = TankFrame.GAME_WIDTH - width;
+        if (x > TankFrame.GAME_WIDTH - WIDTH) {
+            x = TankFrame.GAME_WIDTH - WIDTH;
         }
 
         if (y < 20) {
             y = 20;
         }
 
-        if (y > TankFrame.GAME_HEIGHT - height) {
-            y = TankFrame.GAME_HEIGHT - height;
+        if (y > TankFrame.GAME_HEIGHT - HEIGHT) {
+            y = TankFrame.GAME_HEIGHT - HEIGHT;
         }
     }
 
@@ -145,17 +147,26 @@ public class Tank {
         this.moving = moving;
     }
 
-    public void fire() {
-        /**
-         * show a bullet from tank
-         */
+    // pass the strategy through parameter, make sure actual strategy be singleton.
+    public void fire(FireStrategy fs) {
+        if (group == Group.GOOD) {
+            fs.fire(this);
+        } else {
+            try {
+                Class clazz = Class.forName(PropertyMgr.getInstance().getProperty("badFS"));
+                FireStrategy fs2 = (FireStrategy) clazz.getDeclaredMethod("getInstance").invoke(clazz);
+                fs2.fire(this);
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            } catch (IllegalAccessException ex) {
+                ex.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
 
-        // when adding bullet, we have to decide it's the same group as the current Tank
-        //this.getGroup()
-//        this.tf.getBullets().add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), tf));
-
-//        new FireStrategyDefault().fire(tf, this);
-        new FireStrategyFourDirecionsFire().fire(tf, this);
     }
 
 
@@ -218,7 +229,7 @@ public class Tank {
     public void die() {
         this.alive = false;
         //when tank dies, add Explodes!
-        tf.getExplodes().add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, tf));
+        tf.getExplodes().add(new Explode(x + WIDTH / 2 - Explode.EXPLODEWIDTH / 2, y + HEIGHT / 2 - Explode.EXPLODEHEIGHT / 2, tf));
         this.tf.getEnemies().remove(this);
     }
 
@@ -246,20 +257,13 @@ public class Tank {
         this.y = y;
     }
 
-    public int getWidth() {
-        return width;
+
+    public TankFrame getTf() {
+        return tf;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
+    public void setTf(TankFrame tf) {
+        this.tf = tf;
     }
 }
 

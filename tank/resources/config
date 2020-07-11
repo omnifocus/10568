@@ -1,1 +1,4 @@
 initialTankCount=10
+# config fire strategy
+goodFS=com.yovya.firestrategy.FireStrategyDefault
+badFS=com.yovya.firestrategy.FireStrategyDefault

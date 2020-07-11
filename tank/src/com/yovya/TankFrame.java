@@ -1,11 +1,12 @@
 package com.yovya;
 
+import com.yovya.firestrategy.FireStrategy;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -85,7 +86,13 @@ public class TankFrame extends Frame {
                         break;
 
                     case KeyEvent.VK_CONTROL:
-                        mainTank.fire();
+                        try {
+                            Class clazz = Class.forName(PropertyMgr.getInstance().getProperty("goodFS"));
+                            FireStrategy fs2 = (FireStrategy) clazz.getDeclaredMethod("getInstance").invoke(clazz);
+                            fs2.fire(mainTank);
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
                         break;
                 }
             }
