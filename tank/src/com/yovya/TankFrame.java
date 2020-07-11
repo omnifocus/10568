@@ -24,7 +24,7 @@ public class TankFrame extends Frame {
 
 
     public TankFrame() throws HeadlessException {
-        mainTank = new Tank(300, 400,  Direction.UP,this);
+        mainTank = new Tank(300, 400,  Direction.UP,Group.GOOD,this);
         bullets = new ArrayList<>();
 
 

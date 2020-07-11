@@ -16,6 +16,7 @@ public class Bullet {
     private Direction dir = Direction.DOWN;
     private TankFrame tf;
     private boolean alive = true;
+    private Group group = Group.BAD;
 
     public Bullet(int x, int y, int width, int height,TankFrame tf) {
         this.x = x;
@@ -25,10 +26,11 @@ public class Bullet {
         this.tf = tf;
     }
 
-    public Bullet(int x, int y,Direction dir, TankFrame tf) {
+    public Bullet(int x, int y,Direction dir, Group group,TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -77,6 +79,10 @@ public class Bullet {
     }
 
     public void hitTank(Tank enemy) {
+        //same group, can't fire
+        if (this.group == enemy.getGroup()) {
+            return;
+        }
         if ( this.getRectange().intersects(enemy.getRectange()) ) {
             this.die();
             //enemy.setAlive(false);

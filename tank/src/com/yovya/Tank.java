@@ -19,6 +19,9 @@ public class Tank {
     private boolean moving;
     private TankFrame tf;
     private boolean alive = true;
+    private Group group = Group.BAD;
+
+
 
     private Random random = new Random();
 
@@ -31,10 +34,11 @@ public class Tank {
         this.tf = tf;
     }
 
-    public Tank(int x, int y, Direction dir,TankFrame tf) {
+    public Tank(int x, int y, Direction dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -98,7 +102,9 @@ public class Tank {
          */
         BufferedImage tankImg = getTankImage();
         BufferedImage bulletImg = getBulletImage();
-        this.tf.getBullets().add(new Bullet(x+tankImg.getWidth()/2-bulletImg.getWidth()/2,y + tankImg.getHeight()/2, dir, tf));
+        // when adding bullet, we have to decide it's the same group as the current Tank
+        //this.getGroup()
+        this.tf.getBullets().add(new Bullet(x+tankImg.getWidth()/2-bulletImg.getWidth()/2,y + tankImg.getHeight()/2, dir, this.getGroup(),tf));
     }
 
 
@@ -162,6 +168,14 @@ public class Tank {
 
     public void die() {
         this.alive = false;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
 
