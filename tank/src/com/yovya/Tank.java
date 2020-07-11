@@ -14,7 +14,7 @@ public class Tank {
     int x = 50, y = 50;
     int width = 50, height = 50;
     Direction dir = Direction.UP;
-    final int SPEED = 1;
+    final int SPEED = 10;
     private boolean moving = true;
     private TankFrame tf;
     private boolean alive = true;
@@ -65,6 +65,7 @@ public class Tank {
             return;
         }
 
+        checkBorder();
 
         // if moving , then redraw
         if (moving)
@@ -77,7 +78,30 @@ public class Tank {
         }
     }
 
+    private void checkBorder() {
+        if (x <= 0) {
+            while (dir == Direction.LEFT) {
+                dir = randomDir();
+            }
+        }
+        if (x >= TankFrame.GAME_WIDTH - width) {
+            while (dir == Direction.RIGHT) {
+                dir = randomDir();
+            }
+        }
 
+        if (y <= 20) {
+            while (dir == Direction.UP) {
+                dir = randomDir();
+            }
+        }
+
+        if (y >= TankFrame.GAME_HEIGHT - height) {
+            while (dir == Direction.DOWN) {
+                dir = randomDir();
+            }
+        }
+    }
 
 
     private void move() {
