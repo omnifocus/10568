@@ -12,6 +12,7 @@ public class Explode {
     private int x, y;
     private TankFrame tf;
     private int step = 0;
+    public static final int EXPLODEHEIGHT = ResourceMgr.exImages[0].getHeight(), EXPLODEWIDTH = ResourceMgr.exImages[0].getWidth();
 
     public Explode(int x, int y, TankFrame tf) {
         this.x = x;

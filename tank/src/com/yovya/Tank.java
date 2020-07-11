@@ -22,7 +22,6 @@ public class Tank {
     private boolean moving = true;
 
 
-
     private Random random = new Random();
 
     public Tank(int x, int y, int width, int height, Direction dir, TankFrame tf) {
@@ -32,22 +31,22 @@ public class Tank {
         this.height = height;
         this.dir = dir;
         this.tf = tf;
-        this.moving = group==Group.BAD?true:false;
+        this.moving = group == Group.BAD ? true : false;
     }
 
-    public Tank(int x, int y,  Group group, TankFrame tf) {
+    public Tank(int x, int y, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = randomDir();
         this.group = group;
         this.tf = tf;
-        this.moving = group==Group.BAD?true:false;
+        this.moving = group == Group.BAD ? true : false;
     }
 
 
     private Direction randomDir() {
         int len = Direction.values().length;
-        return Direction.values()[(int)(Math.random()*len)];
+        return Direction.values()[(int) (Math.random() * len)];
 
     }
 
@@ -57,14 +56,14 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
-        this.moving = group==Group.BAD?true:false;
+        this.moving = group == Group.BAD ? true : false;
     }
 
     public void paint(Graphics g) {
 
         if (!alive) {
             //when tank dies, add Explodes!
-            tf.getExplodes().add(new Explode(x,y,tf));
+            tf.getExplodes().add(new Explode(x+width/2-Explode.EXPLODEWIDTH/2, y+height/2-Explode.EXPLODEHEIGHT/2, tf));
             this.tf.getEnemies().remove(this);
             return;
         }
@@ -137,8 +136,8 @@ public class Tank {
         // after move, decide next dir
         // not the mainTank
         // give it an opportunity to change Direction
-        if (group != Group.GOOD && random.nextInt(100) > 95 )
-             dir = randomDir();
+        if (group != Group.GOOD && random.nextInt(100) > 95)
+            dir = randomDir();
     }
 
     public Direction getDir() {
@@ -164,7 +163,7 @@ public class Tank {
 
         // when adding bullet, we have to decide it's the same group as the current Tank
         //this.getGroup()
-        this.tf.getBullets().add(new Bullet(x+width/2-Bullet.BULLETWIDTH/2,y + height/2-Bullet.BULLETHEIGHT/2, dir, this.getGroup(),tf));
+        this.tf.getBullets().add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), tf));
     }
 
 
@@ -202,7 +201,6 @@ public class Tank {
         }
         return image;
     }
-
 
 
     public void die() {
