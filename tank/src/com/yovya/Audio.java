@@ -46,7 +46,6 @@ public class Audio {
 
 	public Audio(String fileName) {
 		try {
-			Object b = Audio.class.getClassLoader().getResource(fileName);
 			audioInputStream = AudioSystem.getAudioInputStream(Audio.class.getClassLoader().getResource(fileName));
 			audioFormat = audioInputStream.getFormat();
 			dataLine_info = new DataLine.Info(SourceDataLine.class, audioFormat);
