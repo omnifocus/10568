@@ -1,5 +1,7 @@
 package com.yovya;
 
+import com.design.Singletonv3;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -10,17 +12,27 @@ import java.util.Properties;
  * @version: 1.0
  */
 public class PropertyMgr {
-    private static Properties properties = new Properties();
-    static {
 
-        try {
-            properties.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config"));
-        } catch (IOException e) {
-            e.printStackTrace();
+    private PropertyMgr() {
+    }
+
+    private static class PropertyMgrInner {
+        private static final Properties properties = new Properties();
+
+        static {
+            try {
+                properties.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
-    public static String getProperties(String key) {
-        return properties.getProperty(key);
+
+    public static Properties getInstance() {
+        return PropertyMgrInner.properties;
     }
+
+
 }

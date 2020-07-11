@@ -16,7 +16,7 @@ public class T {
     public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
         //read initialCount from config
-        int initialCount = Integer.parseInt(PropertyMgr.getProperties("initialTankCount"));
+        int initialCount = Integer.parseInt(PropertyMgr.getInstance().getProperty("initialTankCount"));
 
         //add background music
         new Thread(new Runnable() {
