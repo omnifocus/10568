@@ -12,15 +12,18 @@ import java.util.Random;
  */
 public class Tank {
     int x = 50, y = 50;
-    int width = ResourceMgr.tankU.getWidth(), height = ResourceMgr.tankU.getHeight();
+    int width = ResourceMgr.mainTankU.getWidth(), height = ResourceMgr.mainTankU.getHeight();
     Direction dir = Direction.UP;
     final int SPEED = 5;
+
 
     private TankFrame tf;
     private boolean alive = true;
     private Group group = Group.BAD;
     private boolean moving = true;
 
+    // every 3 step change pic
+    private int step = 0;
 
     private Random random = new Random();
 
@@ -63,7 +66,7 @@ public class Tank {
 
         if (!alive) {
             //when tank dies, add Explodes!
-            tf.getExplodes().add(new Explode(x+width/2-Explode.EXPLODEWIDTH/2, y+height/2-Explode.EXPLODEHEIGHT/2, tf));
+            tf.getExplodes().add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, tf));
             this.tf.getEnemies().remove(this);
             return;
         }
@@ -138,7 +141,11 @@ public class Tank {
         // give it an opportunity to change Direction
         if (group != Group.GOOD && random.nextInt(100) > 95)
             dir = randomDir();
+
+
+        step++;
     }
+
 
     public Direction getDir() {
         return dir;
@@ -183,18 +190,38 @@ public class Tank {
         BufferedImage image = null;
         switch (dir) {
             case UP:
-                image = ResourceMgr.tankU;
-                break;
-            case DOWN:
-                image = ResourceMgr.tankD;
+                if (step % 3 == 0) {
+                    image = group == Group.GOOD ? ResourceMgr.main2TankU : ResourceMgr.bad2TankU;
+                } else {
+                    image = group == Group.GOOD ? ResourceMgr.mainTankU : ResourceMgr.badTankU;
+
+                }
 
                 break;
+            case DOWN:
+                if (step % 3 == 0) {
+                    image = group == Group.GOOD ? ResourceMgr.main2TankD : ResourceMgr.bad2TankD;
+                } else {
+                    image = group == Group.GOOD ? ResourceMgr.mainTankD : ResourceMgr.badTankD;
+
+                }
+                break;
             case LEFT:
-                image = ResourceMgr.tankL;
+                if (step % 3 == 0) {
+                    image = group == Group.GOOD ? ResourceMgr.main2TankL : ResourceMgr.bad2TankL;
+                } else {
+                    image = group == Group.GOOD ? ResourceMgr.mainTankL : ResourceMgr.badTankL;
+
+                }
 
                 break;
             case RIGHT:
-                image = ResourceMgr.tankR;
+                if (step % 3 == 0) {
+                    image = group == Group.GOOD ? ResourceMgr.main2TankR : ResourceMgr.bad2TankR;
+                } else {
+                    image = group == Group.GOOD ? ResourceMgr.mainTankR : ResourceMgr.badTankR;
+
+                }
 
                 break;
 
