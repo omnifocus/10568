@@ -21,12 +21,13 @@ public class TankFrame extends Frame {
     // add a list of bullets
     private ArrayList<Bullet> bullets;
     private ArrayList<Tank> enemies;
+    private Explode explode;
 
 
     public TankFrame() throws HeadlessException {
         mainTank = new Tank(300, 400,  Direction.UP,Group.GOOD,this);
         bullets = new ArrayList<>();
-
+        explode = new Explode(50,50,this);
 
         setTitle("tank war");
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -96,7 +97,7 @@ public class TankFrame extends Frame {
 
 
     /**
-     * when minimize and resotre the frame, this method will be invoked!
+     * when minimize and restore the frame, this method will be invoked!
      *
      * @param g
      */
@@ -129,6 +130,8 @@ public class TankFrame extends Frame {
             Tank enemy = enemies.get(i);
             enemy.paint(g);
         }
+
+        explode.paint(g);
     }
 
     /* double buffer to eliminate flicking */

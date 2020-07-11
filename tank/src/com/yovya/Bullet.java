@@ -18,7 +18,8 @@ public class Bullet {
     private boolean alive = true;
     private Group group = Group.BAD;
 
-    public Bullet(int x, int y, int width, int height,TankFrame tf) {
+
+    public Bullet(int x, int y, int width, int height, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -26,18 +27,21 @@ public class Bullet {
         this.tf = tf;
     }
 
-    public Bullet(int x, int y,Direction dir, Group group,TankFrame tf) {
+    public Bullet(int x, int y, Direction dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+
     }
 
     public Bullet() {
     }
 
     public void paint(Graphics g) {
+
 
         if (!alive) {
             this.tf.getBullets().remove(this);
@@ -64,7 +68,7 @@ public class Bullet {
                 image = ResourceMgr.bulletR;
                 break;
         }
-        g.drawImage(image,x, y,null);
+        g.drawImage(image, x, y, null);
 //        Color c = g.getColor();
 //        g.setColor(Color.RED);
 //
@@ -73,7 +77,7 @@ public class Bullet {
 //        g.setColor(c);
 
 
-        if (x <0 || x> TankFrame.GAME_WIDTH || y <0 || y> TankFrame.GAME_HEIGHT) {
+        if (x < 0 || x > TankFrame.GAME_WIDTH || y < 0 || y > TankFrame.GAME_HEIGHT) {
             alive = false;
         }
     }
@@ -83,7 +87,7 @@ public class Bullet {
         if (this.group == enemy.getGroup()) {
             return;
         }
-        if ( this.getRectange().intersects(enemy.getRectange()) ) {
+        if (this.getRectange().intersects(enemy.getRectange())) {
             this.die();
             //enemy.setAlive(false);
             //I don't know if there's the field
@@ -96,7 +100,7 @@ public class Bullet {
     }
 
     public Rectangle getRectange() {
-        return new Rectangle(x,y,width,height);
+        return new Rectangle(x, y, width, height);
     }
 
     public boolean isAlive() {
