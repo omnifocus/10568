@@ -2,6 +2,7 @@ package com.yovya;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 /**
  * @author: omnifocus
@@ -18,6 +19,8 @@ public class Tank {
     private boolean moving;
     private TankFrame tf;
     private boolean alive = true;
+
+    private Random random = new Random();
 
     public Tank(int x, int y, int width, int height, Direction dir, TankFrame tf) {
         this.x = x;
@@ -45,6 +48,10 @@ public class Tank {
             move();
 
         g.drawImage(getTankImage(), x, y, null);
+        // time to fire
+        if (random.nextInt(10) > 8) {
+            fire();
+        }
     }
 
 
