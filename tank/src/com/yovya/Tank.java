@@ -44,6 +44,8 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!alive) {
+            //when tank dies, add Explodes!
+            tf.getExplodes().add(new Explode(x,y,tf));
             this.tf.getEnemies().remove(this);
             return;
         }

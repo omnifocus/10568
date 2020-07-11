@@ -21,13 +21,14 @@ public class TankFrame extends Frame {
     // add a list of bullets
     private ArrayList<Bullet> bullets;
     private ArrayList<Tank> enemies;
-    private Explode explode;
+    // add a list of explode;
+    private ArrayList<Explode> explodes;
 
 
     public TankFrame() throws HeadlessException {
         mainTank = new Tank(300, 400,  Direction.UP,Group.GOOD,this);
         bullets = new ArrayList<>();
-        explode = new Explode(50,50,this);
+        explodes = new ArrayList<>();
 
         setTitle("tank war");
         setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -108,6 +109,7 @@ public class TankFrame extends Frame {
         g.setColor(c);
         g.drawString("current bullets: " + bullets.size(), 20,40);
         g.drawString("current enemies: " + enemies.size(), 20,60);
+        g.drawString("current explodes: " + explodes.size(), 20,80);
         g.setColor(origin);
 
         /* paint : a tank knows exactly how to paint itself*/
@@ -131,7 +133,9 @@ public class TankFrame extends Frame {
             enemy.paint(g);
         }
 
-        explode.paint(g);
+        for (int i = 0; i < explodes.size(); i++) {
+            explodes.get(i).paint(g);
+        }
     }
 
     /* double buffer to eliminate flicking */
@@ -166,5 +170,13 @@ public class TankFrame extends Frame {
 
     public void setEnemies(ArrayList<Tank> enemies) {
         this.enemies = enemies;
+    }
+
+    public ArrayList<Explode> getExplodes() {
+        return explodes;
+    }
+
+    public void setExplodes(ArrayList<Explode> explodes) {
+        this.explodes = explodes;
     }
 }
