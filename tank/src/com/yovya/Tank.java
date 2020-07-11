@@ -14,9 +14,8 @@ public class Tank {
     int x = 50, y = 50;
     int width = 50, height = 50;
     Direction dir = Direction.UP;
-    final int SPEED = 10;
-    // default state is not moving
-    private boolean moving;
+    final int SPEED = 1;
+    private boolean moving = true;
     private TankFrame tf;
     private boolean alive = true;
     private Group group = Group.BAD;
@@ -34,6 +33,21 @@ public class Tank {
         this.tf = tf;
     }
 
+    public Tank(int x, int y,  Group group, TankFrame tf) {
+        this.x = x;
+        this.y = y;
+        this.dir = randomDir();
+        this.group = group;
+        this.tf = tf;
+    }
+
+
+    private Direction randomDir() {
+        int len = Direction.values().length;
+        return Direction.values()[(int)(Math.random()*len)];
+
+    }
+
     public Tank(int x, int y, Direction dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
@@ -43,12 +57,15 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+
         if (!alive) {
             //when tank dies, add Explodes!
             tf.getExplodes().add(new Explode(x,y,tf));
             this.tf.getEnemies().remove(this);
             return;
         }
+
+
         // if moving , then redraw
         if (moving)
             move();
@@ -59,6 +76,8 @@ public class Tank {
             fire();
         }
     }
+
+
 
 
     private void move() {

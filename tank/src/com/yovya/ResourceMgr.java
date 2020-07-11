@@ -17,32 +17,32 @@ public class ResourceMgr {
 
     static {
         try {
-            tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("tankU.gif"));
-            tankD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("tankD.gif"));
-            tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("tankL.gif"));
-            tankR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("tankR.gif"));
+            tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
+            tankD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
+            tankL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
+            tankR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankR.gif"));
 
-            bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("bulletU.gif"));
-            bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("bulletD.gif"));
-            bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("bulletL.gif"));
-            bulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("bulletR.gif"));
+            bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
+            bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
+            bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
+            bulletR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
 
-            exImages[0] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e1.gif"));
-            exImages[1] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e2.gif"));
-            exImages[2] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e3.gif"));
-            exImages[3]= ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e4.gif"));
-            exImages[4]= ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e5.gif"));
-            exImages[5] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e6.gif"));
-            exImages[6] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e7.gif"));
-            exImages[7] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e8.gif"));
-            exImages[8] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e9.gif"));
-            exImages[9] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e10.gif"));
-            exImages[10] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e11.gif"));
-            exImages[11] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e12.gif"));
-            exImages[12] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e13.gif"));
-            exImages[13] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e14.gif"));
-            exImages[14] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e15.gif"));
-            exImages[15] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("e16.gif"));
+            exImages[0] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e1.gif"));
+            exImages[1] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e2.gif"));
+            exImages[2] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e3.gif"));
+            exImages[3]= ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e4.gif"));
+            exImages[4]= ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e5.gif"));
+            exImages[5] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e6.gif"));
+            exImages[6] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e7.gif"));
+            exImages[7] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e8.gif"));
+            exImages[8] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e9.gif"));
+            exImages[9] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e10.gif"));
+            exImages[10] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e11.gif"));
+            exImages[11] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e12.gif"));
+            exImages[12] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e13.gif"));
+            exImages[13] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e14.gif"));
+            exImages[14] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e15.gif"));
+            exImages[15] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e16.gif"));
 
 
         } catch (IOException e) {

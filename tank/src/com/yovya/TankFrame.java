@@ -104,6 +104,9 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
+
+
+
         Color origin = g.getColor();
         Color c = Color.WHITE;
         g.setColor(c);
@@ -136,7 +139,11 @@ public class TankFrame extends Frame {
         for (int i = 0; i < explodes.size(); i++) {
             explodes.get(i).paint(g);
         }
+
+
     }
+
+
 
     /* double buffer to eliminate flicking */
     Image offScreenImage = null;
