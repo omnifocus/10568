@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class Tank {
     int x = 50, y = 50;
-    int width = 50, height = 50;
+    int width = ResourceMgr.tankU.getWidth(), height = ResourceMgr.tankU.getHeight();
     Direction dir = Direction.UP;
     final int SPEED = 10;
     private boolean moving = true;
@@ -145,11 +145,10 @@ public class Tank {
         /**
          * show a bullet from tank
          */
-        BufferedImage tankImg = getTankImage();
-        BufferedImage bulletImg = getBulletImage();
+
         // when adding bullet, we have to decide it's the same group as the current Tank
         //this.getGroup()
-        this.tf.getBullets().add(new Bullet(x+tankImg.getWidth()/2-bulletImg.getWidth()/2,y + tankImg.getHeight()/2, dir, this.getGroup(),tf));
+        this.tf.getBullets().add(new Bullet(x+width/2-Bullet.BULLETWIDTH/2,y + height/2-Bullet.BULLETHEIGHT/2, dir, this.getGroup(),tf));
     }
 
 
@@ -188,28 +187,7 @@ public class Tank {
         return image;
     }
 
-    private BufferedImage getBulletImage() {
-        BufferedImage image = null;
-        switch (dir) {
-            case UP:
-                image = ResourceMgr.bulletU;
-                break;
-            case DOWN:
-                image = ResourceMgr.bulletD;
 
-                break;
-            case LEFT:
-                image = ResourceMgr.bulletL;
-
-                break;
-            case RIGHT:
-                image = ResourceMgr.bulletR;
-
-                break;
-
-        }
-        return image;
-    }
 
     public void die() {
         this.alive = false;

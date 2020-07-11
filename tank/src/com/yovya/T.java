@@ -16,6 +16,14 @@ public class T {
     public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
 
+        //add background music
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new Audio("audio/war1.wav").loop();
+            }
+        }).start();
+
         // add enemy tanks
         ArrayList enemies = new ArrayList<Tank>();
         for (int i = 0; i < 5; i++) {

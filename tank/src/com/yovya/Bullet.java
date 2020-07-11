@@ -11,7 +11,8 @@ import java.awt.image.BufferedImage;
  * @version: 1.0
  */
 public class Bullet {
-    private int x = 50, y = 50, width = 12, height = 12;
+    private int x = 50, y = 50;
+    public static final int BULLETWIDTH = ResourceMgr.bulletU.getWidth(), BULLETHEIGHT = ResourceMgr.bulletU.getHeight();
     private final int SPEED = 10;
     private Direction dir = Direction.DOWN;
     private TankFrame tf;
@@ -19,11 +20,9 @@ public class Bullet {
     private Group group = Group.BAD;
 
 
-    public Bullet(int x, int y, int width, int height, TankFrame tf) {
+    public Bullet(int x, int y, TankFrame tf) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
         this.tf = tf;
     }
 
@@ -100,7 +99,7 @@ public class Bullet {
     }
 
     public Rectangle getRectange() {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle(x, y, BULLETWIDTH, BULLETHEIGHT);
     }
 
     public boolean isAlive() {
@@ -110,4 +109,6 @@ public class Bullet {
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
+
+
 }
