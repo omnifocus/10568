@@ -8,4 +8,5 @@ package com.design;
  */
 public enum Singletonv3 {
     INSTANCE
+
 }

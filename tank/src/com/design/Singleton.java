@@ -7,7 +7,8 @@ package com.design;
  * @version: 1.0
  */
 public class Singleton {
-    private static Singleton singleton;
+    // volatile to avoid JIT
+    private static volatile  Singleton singleton;
 
     private Singleton() {}
 

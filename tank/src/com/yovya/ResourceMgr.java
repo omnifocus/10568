@@ -65,5 +65,8 @@ public class ResourceMgr {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
+    private ResourceMgr() {}
 }
