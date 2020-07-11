@@ -12,19 +12,16 @@ import java.awt.image.BufferedImage;
  */
 public class Bullet {
     private int x = 50, y = 50;
-    public static final int BULLETWIDTH = ResourceMgr.bulletU.getWidth(), BULLETHEIGHT = ResourceMgr.bulletU.getHeight();
+    public  static final int BULLETWIDTH = ResourceMgr.bulletU.getWidth(), BULLETHEIGHT = ResourceMgr.bulletU.getHeight();
     private final int SPEED = 30;
     private Direction dir = Direction.DOWN;
     private TankFrame tf;
     private boolean alive = true;
     private Group group = Group.BAD;
 
+    private Rectangle rectangle ;
 
-    public Bullet(int x, int y, TankFrame tf) {
-        this.x = x;
-        this.y = y;
-        this.tf = tf;
-    }
+
 
     public Bullet(int x, int y, Direction dir, Group group, TankFrame tf) {
         this.x = x;
@@ -32,7 +29,7 @@ public class Bullet {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
-
+        this.rectangle = new Rectangle(x,y,BULLETWIDTH,BULLETHEIGHT);
 
     }
 
@@ -43,7 +40,7 @@ public class Bullet {
 
 
         if (!alive) {
-            this.tf.getBullets().remove(this);
+//            this.tf.getBullets().remove(this);
             return;
         }
 
@@ -75,9 +72,11 @@ public class Bullet {
 //
 //        g.setColor(c);
 
-
+        // update rectangle after moves
+        rectangle.x = x;
+        rectangle.y = y;
         if (x < 0 || x > TankFrame.GAME_WIDTH || y < 0 || y > TankFrame.GAME_HEIGHT) {
-            alive = false;
+            this.die();
         }
     }
 
@@ -86,7 +85,7 @@ public class Bullet {
         if (this.group == enemy.getGroup()) {
             return;
         }
-        if (this.getRectange().intersects(enemy.getRectange())) {
+        if (this.rectangle.intersects(enemy.getRectangle())) {
             this.die();
             //enemy.setAlive(false);
             //I don't know if there's the field
@@ -96,11 +95,11 @@ public class Bullet {
 
     private void die() {
         this.setAlive(false);
+        //once die, remove from tf immediately
+        this.tf.getBullets().remove(this);
     }
 
-    public Rectangle getRectange() {
-        return new Rectangle(x, y, BULLETWIDTH, BULLETHEIGHT);
-    }
+
 
     public boolean isAlive() {
         return alive;
@@ -110,5 +109,7 @@ public class Bullet {
         this.alive = alive;
     }
 
-
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
 }

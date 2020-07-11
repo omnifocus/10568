@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public class T {
     public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
+        //read initialCount from config
+        int initialCount = Integer.parseInt(PropertyMgr.getProperties("initialTankCount"));
 
         //add background music
         new Thread(new Runnable() {
@@ -26,8 +28,9 @@ public class T {
 
         // add enemy tanks
         ArrayList enemies = new ArrayList<Tank>();
-        for (int i = 0; i < 5; i++) {
-            enemies.add(new Tank(30 + i * 130, 100,  Group.BAD, tf));
+
+        for (int i = 0; i < initialCount; i++) {
+            enemies.add(new Tank(30 + i * 130, 100, Direction.DOWN, Group.BAD, tf));
         }
         tf.setEnemies(enemies);
 

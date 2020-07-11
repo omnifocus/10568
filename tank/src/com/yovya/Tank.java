@@ -25,26 +25,13 @@ public class Tank {
     // every 3 step change pic
     private int step = 0;
 
+    private Rectangle rectangle ;
+
     private Random random = new Random();
 
-    public Tank(int x, int y, int width, int height, Direction dir, TankFrame tf) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.dir = dir;
-        this.tf = tf;
-        this.moving = group == Group.BAD ? true : false;
-    }
 
-    public Tank(int x, int y, Group group, TankFrame tf) {
-        this.x = x;
-        this.y = y;
-        this.dir = randomDir();
-        this.group = group;
-        this.tf = tf;
-        this.moving = group == Group.BAD ? true : false;
-    }
+
+
 
 
     private Direction randomDir() {
@@ -60,14 +47,13 @@ public class Tank {
         this.group = group;
         this.tf = tf;
         this.moving = group == Group.BAD ? true : false;
+        this.rectangle = new Rectangle(x, y, width, height);
     }
 
     public void paint(Graphics g) {
 
         if (!alive) {
-            //when tank dies, add Explodes!
-            tf.getExplodes().add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, tf));
-            this.tf.getEnemies().remove(this);
+
             return;
         }
 
@@ -131,6 +117,9 @@ public class Tank {
                 break;
         }
 
+        // update tank's rectangle after moves
+        rectangle.x = x;
+        rectangle.y = y;
         // after move, decide next dir
         // not the mainTank
         // give it an opportunity to change Direction
@@ -169,8 +158,8 @@ public class Tank {
     }
 
 
-    public Rectangle getRectange() {
-        return new Rectangle(x, y, width, height);
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
     public boolean isAlive() {
@@ -227,6 +216,9 @@ public class Tank {
 
     public void die() {
         this.alive = false;
+        //when tank dies, add Explodes!
+        tf.getExplodes().add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, tf));
+        this.tf.getEnemies().remove(this);
     }
 
     public Group getGroup() {
