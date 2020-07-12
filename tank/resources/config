@@ -1,1 +1,3 @@
 initialTankCount=10
+#skin change
+skinFactory=com.yovya.DoodleFactory

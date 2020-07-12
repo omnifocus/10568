@@ -28,6 +28,6 @@ public class DoodleFactory extends AbstractFactory {
 
     @Override
     BaseExplode createExplode(int x, int y, TankFrame tf) {
-        return null;
+        return new DoodleExplode(x, y, tf);
     }
 }

@@ -31,7 +31,7 @@ public class T {
 
         for (int i = 0; i < initialCount; i++) {
 //            enemies.add(new Tank(30 + i * 130, 100, Direction.DOWN, Group.BAD, tf));
-            enemies.add(tf.af.createTank(30 + i * 130, 100, Direction.DOWN, Group.BAD, tf));
+            enemies.add(new Tank(30 + i * 130, 100, Direction.DOWN, Group.BAD, tf));
         }
         tf.setEnemies(enemies);
 

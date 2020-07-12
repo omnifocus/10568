@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -23,12 +24,26 @@ public class TankFrame extends Frame {
     private ArrayList<Tank> enemies;
     // add a list of explode;
     ArrayList<BaseExplode> explodes;
-    AbstractFactory af = DefaultFactory.getInstance();
+    static AbstractFactory af;
 
+    static {
+        try {
+            Class clazz = Class.forName(PropertyMgr.getProperties("skinFactory"));
+            af = (AbstractFactory) clazz.getDeclaredMethod("getInstance").invoke(clazz);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
 
     public TankFrame() throws HeadlessException {
 
-        mainTank = (Tank) af.createTank(300, 400, Direction.UP, Group.GOOD, this);
+        mainTank = new Tank(300, 400, Direction.UP, Group.GOOD, this);
         bullets = new ArrayList<>();
         explodes = new ArrayList<>();
 
