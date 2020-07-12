@@ -80,7 +80,7 @@ public class Bullet extends BaseBullet {
         }
     }
 
-    public void hitTank(Tank enemy) {
+    public void hitTank(BaseTank enemy) {
         //same group, can't fire
         if (this.group == enemy.getGroup()) {
             return;

@@ -13,19 +13,17 @@ import java.util.Random;
 public class Tank extends BaseTank {
     int x = 50, y = 50;
     int width = ResourceMgr.mainTankU.getWidth(), height = ResourceMgr.mainTankU.getHeight();
-    Direction dir = Direction.UP;
+
     final int SPEED = 5;
 
 
     TankFrame tf;
     boolean alive = true;
-    Group group = Group.BAD;
-    boolean moving = true;
+
 
     // every 3 step change pic
     private int step = 0;
 
-    private Rectangle rectangle;
 
     private Random random = new Random();
 

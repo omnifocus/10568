@@ -18,10 +18,10 @@ import java.util.Collection;
  */
 public class TankFrame extends Frame {
     public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
-    private Tank mainTank;
+    private BaseTank mainTank;
     // add a list of bullets
     ArrayList<BaseBullet> bullets;
-    private ArrayList<Tank> enemies;
+    private ArrayList<BaseTank> enemies;
     // add a list of explode;
     ArrayList<BaseExplode> explodes;
     static AbstractFactory af;
@@ -43,7 +43,7 @@ public class TankFrame extends Frame {
 
     public TankFrame() throws HeadlessException {
 
-        mainTank = new Tank(300, 400, Direction.UP, Group.GOOD, this);
+        mainTank = af.createTank(300, 400, Direction.UP, Group.GOOD, this);
         bullets = new ArrayList<>();
         explodes = new ArrayList<>();
 
@@ -149,7 +149,7 @@ public class TankFrame extends Frame {
         }
 
         for (int i = 0; i < enemies.size(); i++) {
-            Tank enemy = enemies.get(i);
+            BaseTank enemy = enemies.get(i);
             enemy.paint(g);
         }
 
@@ -181,14 +181,11 @@ public class TankFrame extends Frame {
     }
 
 
-
-    public ArrayList<Tank> getEnemies() {
+    public ArrayList<BaseTank> getEnemies() {
         return enemies;
     }
 
-    public void setEnemies(ArrayList<Tank> enemies) {
+    public void setEnemies(ArrayList<BaseTank> enemies) {
         this.enemies = enemies;
     }
-
-
 }
