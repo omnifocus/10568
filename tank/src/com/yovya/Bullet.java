@@ -1,5 +1,7 @@
 package com.yovya;
 
+import com.yovya.changeskin.AbstractSkin;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -11,16 +13,14 @@ import java.awt.image.BufferedImage;
  */
 public class Bullet {
     private int x = 50, y = 50;
-    public  static final int BULLETWIDTH = ResourceMgr.bulletU.getWidth(), BULLETHEIGHT = ResourceMgr.bulletU.getHeight();
+    public static final int BULLETWIDTH = ResourceMgr.bulletU.getWidth(), BULLETHEIGHT = ResourceMgr.bulletU.getHeight();
     private final int SPEED = 30;
     private Direction dir = Direction.DOWN;
     private TankFrame tf;
     private boolean alive = true;
     private Group group = Group.BAD;
 
-    private Rectangle rectangle ;
-
-
+    private Rectangle rectangle;
 
 
     public Bullet(int x, int y, Direction dir, Group group, TankFrame tf) {
@@ -37,7 +37,7 @@ public class Bullet {
     public Bullet() {
     }
 
-    public void paint(Graphics g) {
+    public void paint(Graphics g, AbstractSkin as) {
 
 
         if (!alive) {
@@ -45,6 +45,38 @@ public class Bullet {
             return;
         }
 
+        move();
+        // use abstract factory
+//        g.drawImage(getBulletImage(), x, y, null);
+        as.drawBullet(g, this);
+
+
+        // update rectangle after moves
+        rectangle.x = x;
+        rectangle.y = y;
+        if (x < 0 || x > TankFrame.GAME_WIDTH || y < 0 || y > TankFrame.GAME_HEIGHT) {
+            this.die();
+        }
+    }
+
+    public void move() {
+        switch (dir) {
+            case UP:
+                y -= SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+            case LEFT:
+                x -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+        }
+    }
+
+    public BufferedImage getBulletImage() {
         //because the pictures not very ok, calculates every one each time
         BufferedImage image = null;
         switch (dir) {
@@ -65,20 +97,7 @@ public class Bullet {
                 image = ResourceMgr.bulletR;
                 break;
         }
-        g.drawImage(image, x, y, null);
-//        Color c = g.getColor();
-//        g.setColor(Color.RED);
-//
-//        g.fillOval(x, y, width, height);
-//
-//        g.setColor(c);
-
-        // update rectangle after moves
-        rectangle.x = x;
-        rectangle.y = y;
-        if (x < 0 || x > TankFrame.GAME_WIDTH || y < 0 || y > TankFrame.GAME_HEIGHT) {
-            this.die();
-        }
+        return image;
     }
 
     public void hitTank(Tank enemy) {
@@ -101,7 +120,6 @@ public class Bullet {
     }
 
 
-
     public boolean isAlive() {
         return alive;
     }
@@ -112,5 +130,21 @@ public class Bullet {
 
     public Rectangle getRectangle() {
         return rectangle;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

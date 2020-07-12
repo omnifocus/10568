@@ -1,6 +1,9 @@
 package com.yovya;
 
+import com.yovya.changeskin.AbstractSkin;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * @author: omnifocus
@@ -18,6 +21,7 @@ public class Explode {
         this.x = x;
         this.y = y;
         this.tf = tf;
+        this.tf.getExplodes().add(this);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -27,13 +31,43 @@ public class Explode {
         }).start();
     }
 
-    public void paint(Graphics g) {
+    public void paint(Graphics g, AbstractSkin as) {
         if (step >= ResourceMgr.exImages.length) {
 //            step = 0;
             this.tf.getExplodes().remove(this);
         } else {
-            g.drawImage(ResourceMgr.exImages[step++],x,y,null);
+            //          use abstract factory
+//            g.drawImage(getExplodeImage(),x,y,null);
+            as.drawExplode(g, this);
+            step++;
         }
     }
 
+    public BufferedImage getExplodeImage() {
+        return ResourceMgr.exImages[step++];
+    }
+
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
 }

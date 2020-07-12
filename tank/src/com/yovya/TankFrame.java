@@ -1,5 +1,6 @@
 package com.yovya;
 
+import com.yovya.changeskin.AbstractSkin;
 import com.yovya.firestrategy.FireStrategy;
 
 import java.awt.*;
@@ -7,6 +8,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -113,17 +115,30 @@ public class TankFrame extends Frame {
     public void paint(Graphics g) {
 
 
-
         Color origin = g.getColor();
         Color c = Color.WHITE;
         g.setColor(c);
-        g.drawString("current bullets: " + bullets.size(), 20,40);
-        g.drawString("current enemies: " + enemies.size(), 20,60);
-        g.drawString("current explodes: " + explodes.size(), 20,80);
+        g.drawString("current bullets: " + bullets.size(), 20, 40);
+        g.drawString("current enemies: " + enemies.size(), 20, 60);
+        g.drawString("current explodes: " + explodes.size(), 20, 80);
         g.setColor(origin);
 
         /* paint : a tank knows exactly how to paint itself*/
-        mainTank.paint(g);
+        AbstractSkin as = null;
+        try {
+            as = (AbstractSkin) Class.forName(PropertyMgr.getInstance().getProperty("skin")).getDeclaredConstructor().newInstance();
+            mainTank.paint(g, as);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         //java.util.ConcurrentModificationException
 //        for (Bullet bullet : bullets) {
@@ -132,19 +147,19 @@ public class TankFrame extends Frame {
 
         for (int i = 0; i < bullets.size(); i++) {
             Bullet bullet = bullets.get(i);
-            for (int j=0; j< enemies.size(); j++) {
+            for (int j = 0; j < enemies.size(); j++) {
                 bullet.hitTank(enemies.get(j));
             }
-            bullet.paint(g);
+            bullet.paint(g, as);
         }
 
         for (int i = 0; i < enemies.size(); i++) {
             Tank enemy = enemies.get(i);
-            enemy.paint(g);
+            enemy.paint(g, as);
         }
 
         for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
+            explodes.get(i).paint(g, as);
         }
 
 

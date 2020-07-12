@@ -1,4 +1,6 @@
 initialTankCount=10
 # config fire strategy
-goodFS=com.yovya.firestrategy.FireStrategyDefault
+goodFS=com.yovya.firestrategy.FireStrategyFourDirecionsFire
 badFS=com.yovya.firestrategy.FireStrategyDefault
+# config skin
+skin=com.yovya.changeskin.doodleSkin

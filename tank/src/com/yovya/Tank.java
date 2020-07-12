@@ -1,5 +1,6 @@
 package com.yovya;
 
+import com.yovya.changeskin.AbstractSkin;
 import com.yovya.firestrategy.FireStrategy;
 import com.yovya.firestrategy.FireStrategyDefault;
 
@@ -50,7 +51,7 @@ public class Tank {
         this.rectangle = new Rectangle(x, y, WIDTH, HEIGHT);
     }
 
-    public void paint(Graphics g) {
+    public void paint(Graphics g, AbstractSkin as) {
 
         if (!alive) {
 
@@ -63,7 +64,10 @@ public class Tank {
         if (moving)
             move();
 
-        g.drawImage(getTankImage(), x, y, null);
+        // abstract factory
+//        g.drawImage(getTankImage(), x, y, null);
+        as.drawTank(g, this);
+
         /*
         // time to fire
 
@@ -128,6 +132,7 @@ public class Tank {
 
 
         step++;
+
     }
 
 
@@ -182,7 +187,7 @@ public class Tank {
         this.alive = alive;
     }
 
-    private BufferedImage getTankImage() {
+    public BufferedImage getTankImage() {
         BufferedImage image = null;
         switch (dir) {
             case UP:
@@ -229,7 +234,7 @@ public class Tank {
     public void die() {
         this.alive = false;
         //when tank dies, add Explodes!
-        tf.getExplodes().add(new Explode(x + WIDTH / 2 - Explode.EXPLODEWIDTH / 2, y + HEIGHT / 2 - Explode.EXPLODEHEIGHT / 2, tf));
+        new Explode(x + WIDTH / 2 - Explode.EXPLODEWIDTH / 2, y + HEIGHT / 2 - Explode.EXPLODEHEIGHT / 2, tf);
         this.tf.getEnemies().remove(this);
     }
 
