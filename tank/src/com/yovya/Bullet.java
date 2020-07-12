@@ -79,17 +79,19 @@ public class Bullet extends GameObject {
         }
     }
 
-    public void hitTank(Tank enemy) {
+    public boolean doCollide(Tank enemy) {
         //same group, can't fire
         if (this.group == enemy.getGroup()) {
-            return;
+            return false;
         }
         if (this.rectangle.intersects(enemy.getRectangle())) {
             this.die();
             //enemy.setAlive(false);
             //I don't know if there's the field
             enemy.die();
+            return true;
         }
+        return false;
     }
 
     private void die() {

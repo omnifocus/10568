@@ -7,5 +7,5 @@ package com.yovya;
  * @version: 1.0
  */
 public interface Collider {
-    void collide(GameObject o1, GameObject o2);
+    boolean doCollide(GameObject o1, GameObject o2);
 }

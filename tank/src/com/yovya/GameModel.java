@@ -12,8 +12,7 @@ import java.util.ArrayList;
 public class GameModel {
     ArrayList<GameObject> gos = new ArrayList<>();
     Tank mainTank = new Tank(300, 400, Direction.UP, Group.GOOD, this);
-    Collider btc = new BulletTankCollider();
-    Collider ttc = new TankTankCollider();
+    ColliderChain chain;
 
     public GameModel() {
         addObject(mainTank);
@@ -25,6 +24,7 @@ public class GameModel {
         for (int i = 0; i < initialCount; i++) {
             addObject(new Tank(30 + i * 100, 100, Direction.DOWN, Group.BAD, this));
         }
+        chain = new ColliderChain();
     }
 
     void addObject(GameObject go) {
@@ -40,8 +40,7 @@ public class GameModel {
             for (int j = i + 1; j < gos.size(); j++) {
                 GameObject o1 = gos.get(i);
                 GameObject o2 = gos.get(j);
-                btc.collide(o1, o2);
-                ttc.collide(o1, o2);
+                chain.doCollide(o1, o2);
             }
         }
 

@@ -1,1 +1,3 @@
 initialTankCount=10
+#colliders
+colliders=com.yovya.BulletTankCollider,com.yovya.TankTankCollider

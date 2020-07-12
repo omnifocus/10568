@@ -28,7 +28,8 @@ public class Tank extends GameObject {
 
     private Random random = new Random();
 
-    private int prevX, prevY;
+    // original main Tank position
+    private int prevX = 300, prevY = 400;
 
     private Direction randomDir() {
         int len = Direction.values().length;
@@ -94,7 +95,7 @@ public class Tank extends GameObject {
     }
 
     /*each goes back if collide with another Tank*/
-    public void collide(Tank tank) {
+    public void doCollide(Tank tank) {
         if (getRectangle().intersects(tank.getRectangle())) {
             this.x = prevX;
             this.y = prevY;
@@ -134,7 +135,7 @@ public class Tank extends GameObject {
         // after move, decide next dir
         // not the mainTank
         // give it an opportunity to change Direction
-        if (group != Group.GOOD && random.nextInt(10) > 5)
+        if (group != Group.GOOD && random.nextInt(100) > 95)
             dir = randomDir();
 
 
