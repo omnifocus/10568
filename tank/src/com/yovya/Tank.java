@@ -17,7 +17,7 @@ public class Tank {
     final int SPEED = 5;
 
 
-    private TankFrame tf;
+    private GameModel gm;
     private boolean alive = true;
     private Group group = Group.BAD;
     private boolean moving = true;
@@ -40,12 +40,12 @@ public class Tank {
 
     }
 
-    public Tank(int x, int y, Direction dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, Direction dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
         this.moving = group == Group.BAD ? true : false;
         this.rectangle = new Rectangle(x, y, width, height);
     }
@@ -154,7 +154,7 @@ public class Tank {
 
         // when adding bullet, we have to decide it's the same group as the current Tank
         //this.getGroup()
-        this.tf.getBullets().add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), tf));
+        gm.bullets.add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), gm));
     }
 
 
@@ -217,8 +217,8 @@ public class Tank {
     public void die() {
         this.alive = false;
         //when tank dies, add Explodes!
-        tf.getExplodes().add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, tf));
-        this.tf.getEnemies().remove(this);
+        gm.explodes.add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, gm));
+        this.gm.enemies.remove(this);
     }
 
     public Group getGroup() {

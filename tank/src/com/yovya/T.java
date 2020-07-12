@@ -12,11 +12,11 @@ import java.util.ArrayList;
  * @Description: com.yovya, create a useless Frame
  * @version: 1.0
  */
+
+
 public class T {
     public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
-        //read initialCount from config
-        int initialCount = Integer.parseInt(PropertyMgr.getProperties("initialTankCount"));
 
         //add background music
         new Thread(new Runnable() {
@@ -26,13 +26,7 @@ public class T {
             }
         }).start();
 
-        // add enemy tanks
-        ArrayList enemies = new ArrayList<Tank>();
 
-        for (int i = 0; i < initialCount; i++) {
-            enemies.add(new Tank(30 + i * 130, 100, Direction.DOWN, Group.BAD, tf));
-        }
-        tf.setEnemies(enemies);
 
 
         // refresh automatically every 50ms

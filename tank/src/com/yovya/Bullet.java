@@ -15,21 +15,20 @@ public class Bullet {
     public  static final int BULLETWIDTH = ResourceMgr.bulletU.getWidth(), BULLETHEIGHT = ResourceMgr.bulletU.getHeight();
     private final int SPEED = 30;
     private Direction dir = Direction.DOWN;
-    private TankFrame tf;
+    private GameModel gm;
     private boolean alive = true;
     private Group group = Group.BAD;
 
     private Rectangle rectangle ;
 
 
-
-    public Bullet(int x, int y, Direction dir, Group group, TankFrame tf) {
+    public Bullet(int x, int y, Direction dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
-        this.rectangle = new Rectangle(x,y,BULLETWIDTH,BULLETHEIGHT);
+        this.gm = gm;
+        this.rectangle = new Rectangle(x, y, BULLETWIDTH, BULLETHEIGHT);
 
     }
 
@@ -96,7 +95,7 @@ public class Bullet {
     private void die() {
         this.setAlive(false);
         //once die, remove from tf immediately
-        this.tf.getBullets().remove(this);
+        this.gm.bullets.remove(this);
     }
 
 

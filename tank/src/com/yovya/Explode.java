@@ -13,11 +13,12 @@ public class Explode {
     private TankFrame tf;
     private int step = 0;
     public static final int EXPLODEHEIGHT = ResourceMgr.exImages[0].getHeight(), EXPLODEWIDTH = ResourceMgr.exImages[0].getWidth();
+    GameModel gm;
 
-    public Explode(int x, int y, TankFrame tf) {
+    public Explode(int x, int y, GameModel gm) {
         this.x = x;
         this.y = y;
-        this.tf = tf;
+        this.gm = gm;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -30,7 +31,7 @@ public class Explode {
     public void paint(Graphics g) {
         if (step >= ResourceMgr.exImages.length) {
 //            step = 0;
-            this.tf.getExplodes().remove(this);
+            this.gm.explodes.remove(this);
         } else {
             g.drawImage(ResourceMgr.exImages[step++],x,y,null);
         }
