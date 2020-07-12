@@ -10,12 +10,11 @@ import java.util.Random;
  * @Description: com.yovya
  * @version: 1.0
  */
-public class Tank {
+public class Tank extends GameObject {
     int x = 50, y = 50;
     int width = ResourceMgr.mainTankU.getWidth(), height = ResourceMgr.mainTankU.getHeight();
     Direction dir = Direction.UP;
     final int SPEED = 5;
-
 
     private GameModel gm;
     private boolean alive = true;
@@ -25,17 +24,15 @@ public class Tank {
     // every 3 step change pic
     private int step = 0;
 
-    private Rectangle rectangle ;
+    private Rectangle rectangle;
 
     private Random random = new Random();
 
-
-
-
-
+    private int prevX, prevY;
 
     private Direction randomDir() {
         int len = Direction.values().length;
+
         return Direction.values()[(int) (Math.random() * len)];
 
     }
@@ -59,11 +56,12 @@ public class Tank {
 
         checkBorder();
 
+        g.drawImage(getTankImage(), x, y, null);
         // if moving , then redraw
         if (moving)
             move();
 
-        g.drawImage(getTankImage(), x, y, null);
+
         /*
         // time to fire
 
@@ -80,7 +78,7 @@ public class Tank {
     private void checkBorder() {
 
         if (x < 0) {
-           x = 0;
+            x = 0;
         }
         if (x > TankFrame.GAME_WIDTH - width) {
             x = TankFrame.GAME_WIDTH - width;
@@ -95,8 +93,21 @@ public class Tank {
         }
     }
 
+    /*each goes back if collide with another Tank*/
+    public void collide(Tank tank) {
+        if (getRectangle().intersects(tank.getRectangle())) {
+            this.x = prevX;
+            this.y = prevY;
+            tank.x = tank.prevX;
+            tank.y = tank.prevY;
+
+
+        }
+    }
 
     private void move() {
+        prevX = x;
+        prevY = y;
         // check border inside move
         checkBorder();
         switch (dir) {
@@ -123,7 +134,7 @@ public class Tank {
         // after move, decide next dir
         // not the mainTank
         // give it an opportunity to change Direction
-        if (group != Group.GOOD && random.nextInt(100) > 95)
+        if (group != Group.GOOD && random.nextInt(10) > 5)
             dir = randomDir();
 
 
@@ -154,7 +165,7 @@ public class Tank {
 
         // when adding bullet, we have to decide it's the same group as the current Tank
         //this.getGroup()
-        gm.bullets.add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), gm));
+        gm.gos.add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), gm));
     }
 
 
@@ -217,8 +228,8 @@ public class Tank {
     public void die() {
         this.alive = false;
         //when tank dies, add Explodes!
-        gm.explodes.add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, gm));
-        this.gm.enemies.remove(this);
+        gm.gos.add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, gm));
+        this.gm.gos.remove(this);
     }
 
     public Group getGroup() {

@@ -10,59 +10,39 @@ import java.util.ArrayList;
  * @version: 1.0
  */
 public class GameModel {
-    Tank mainTank;
-    // add a list of bullets
-    ArrayList<Bullet> bullets;
-    ArrayList<Tank> enemies;
-    // add a list of explode;
-    ArrayList<Explode> explodes;
+    ArrayList<GameObject> gos = new ArrayList<>();
+    Tank mainTank = new Tank(300, 400, Direction.UP, Group.GOOD, this);
+    Collider btc = new BulletTankCollider();
+    Collider ttc = new TankTankCollider();
 
     public GameModel() {
-        mainTank = new Tank(300, 400, Direction.UP, Group.GOOD, this);
-        bullets = new ArrayList<>();
-        explodes = new ArrayList<>();
+        addObject(mainTank);
+
         //read initialCount from config
         int initialCount = Integer.parseInt(PropertyMgr.getProperties("initialTankCount"));
         // add enemy tanks
-        enemies = new ArrayList<Tank>();
 
         for (int i = 0; i < initialCount; i++) {
-            enemies.add(new Tank(30 + i * 130, 100, Direction.DOWN, Group.BAD, this));
+            addObject(new Tank(30 + i * 100, 100, Direction.DOWN, Group.BAD, this));
         }
     }
 
+    void addObject(GameObject go) {
+        gos.add(go);
+    }
+
     public void paint(Graphics g) {
-        Color origin = g.getColor();
-        Color c = Color.WHITE;
-        g.setColor(c);
-        g.drawString("current bullets: " + bullets.size(), 20, 40);
-        g.drawString("current enemies: " + enemies.size(), 20, 60);
-        g.drawString("current explodes: " + explodes.size(), 20, 80);
-        g.setColor(origin);
+        for (int i = 0; i < gos.size(); i++) {
+            gos.get(i).paint(g);
+        }
 
-        /* paint : a tank knows exactly how to paint itself*/
-        mainTank.paint(g);
-
-        //java.util.ConcurrentModificationException
-//        for (Bullet bullet : bullets) {
-//            bullet.paint(g);
-//        }
-
-        for (int i = 0; i < bullets.size(); i++) {
-            Bullet bullet = bullets.get(i);
-            for (int j = 0; j < enemies.size(); j++) {
-                bullet.hitTank(enemies.get(j));
+        for (int i = 0; i < gos.size(); i++) {
+            for (int j = i + 1; j < gos.size(); j++) {
+                GameObject o1 = gos.get(i);
+                GameObject o2 = gos.get(j);
+                btc.collide(o1, o2);
+                ttc.collide(o1, o2);
             }
-            bullet.paint(g);
-        }
-
-        for (int i = 0; i < enemies.size(); i++) {
-            Tank enemy = enemies.get(i);
-            enemy.paint(g);
-        }
-
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
         }
 
     }
