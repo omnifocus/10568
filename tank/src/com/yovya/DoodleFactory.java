@@ -23,7 +23,7 @@ public class DoodleFactory extends AbstractFactory {
 
     @Override
     BaseBullet createBullet(int x, int y, Direction dir, Group group, TankFrame tf) {
-        return null;
+        return new DoodleBullet(x, y, dir, group, tf);
     }
 
     @Override

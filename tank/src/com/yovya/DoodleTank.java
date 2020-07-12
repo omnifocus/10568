@@ -219,7 +219,7 @@ public class DoodleTank extends BaseTank {
     public void die() {
         this.alive = false;
         //when tank dies, add Explodes!
-        tf.explodes.add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, tf));
+        tf.explodes.add(tf.af.createExplode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, tf));
         this.tf.getEnemies().remove(this);
     }
 
