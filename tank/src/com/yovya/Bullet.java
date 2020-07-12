@@ -96,7 +96,7 @@ public class Bullet extends BaseBullet {
     private void die() {
         this.setAlive(false);
         //once die, remove from tf immediately
-        this.tf.getBullets().remove(this);
+        this.tf.bullets.remove(this);
     }
 
 

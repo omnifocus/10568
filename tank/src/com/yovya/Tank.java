@@ -154,7 +154,7 @@ public class Tank extends BaseTank {
 
         // when adding bullet, we have to decide it's the same group as the current Tank
         //this.getGroup()
-        this.tf.getBullets().add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), tf));
+        this.tf.bullets.add(tf.af.createBullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), tf));
     }
 
 

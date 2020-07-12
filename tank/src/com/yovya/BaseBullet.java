@@ -10,4 +10,6 @@ import java.awt.*;
  */
 public abstract class BaseBullet {
     abstract void paint(Graphics g);
+
+    abstract void hitTank(Tank enemy);
 }

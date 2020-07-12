@@ -20,7 +20,7 @@ public class TankFrame extends Frame {
     public static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
     private Tank mainTank;
     // add a list of bullets
-    private ArrayList<Bullet> bullets;
+    ArrayList<BaseBullet> bullets;
     private ArrayList<Tank> enemies;
     // add a list of explode;
     ArrayList<BaseExplode> explodes;
@@ -141,7 +141,7 @@ public class TankFrame extends Frame {
 //        }
 
         for (int i = 0; i < bullets.size(); i++) {
-            Bullet bullet = bullets.get(i);
+            BaseBullet bullet = bullets.get(i);
             for (int j=0; j< enemies.size(); j++) {
                 bullet.hitTank(enemies.get(j));
             }
@@ -180,13 +180,7 @@ public class TankFrame extends Frame {
 
     }
 
-    public Collection<Bullet> getBullets() {
-        return bullets;
-    }
 
-    public void setBullets(ArrayList<Bullet> bullets) {
-        this.bullets = bullets;
-    }
 
     public ArrayList<Tank> getEnemies() {
         return enemies;
