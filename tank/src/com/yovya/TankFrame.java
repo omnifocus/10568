@@ -22,11 +22,13 @@ public class TankFrame extends Frame {
     private ArrayList<Bullet> bullets;
     private ArrayList<Tank> enemies;
     // add a list of explode;
-    private ArrayList<Explode> explodes;
+    ArrayList<BaseExplode> explodes;
+    AbstractFactory af = DefaultFactory.getInstance();
 
 
     public TankFrame() throws HeadlessException {
-        mainTank = new Tank(300, 400,  Direction.UP,Group.GOOD,this);
+
+        mainTank = (Tank) af.createTank(300, 400, Direction.UP, Group.GOOD, this);
         bullets = new ArrayList<>();
         explodes = new ArrayList<>();
 
@@ -179,11 +181,5 @@ public class TankFrame extends Frame {
         this.enemies = enemies;
     }
 
-    public ArrayList<Explode> getExplodes() {
-        return explodes;
-    }
 
-    public void setExplodes(ArrayList<Explode> explodes) {
-        this.explodes = explodes;
-    }
 }

@@ -6,21 +6,22 @@ import java.util.Random;
 
 /**
  * @author: omnifocus
- * @Date: 2020/7/10 3:25 PM
+ * @Date: 2020/7/12 1:03 PM
  * @Description: com.yovya
  * @version: 1.0
  */
-public class Tank extends BaseTank {
+public class DoodleTank extends BaseTank {
+
     int x = 50, y = 50;
     int width = ResourceMgr.mainTankU.getWidth(), height = ResourceMgr.mainTankU.getHeight();
     Direction dir = Direction.UP;
     final int SPEED = 5;
 
 
-    TankFrame tf;
-    boolean alive = true;
-    Group group = Group.BAD;
-    boolean moving = true;
+    private TankFrame tf;
+    private boolean alive = true;
+    private Group group = Group.BAD;
+    private boolean moving = true;
 
     // every 3 step change pic
     private int step = 0;
@@ -30,17 +31,13 @@ public class Tank extends BaseTank {
     private Random random = new Random();
 
 
-
-
-
-
     private Direction randomDir() {
         int len = Direction.values().length;
         return Direction.values()[(int) (Math.random() * len)];
 
     }
 
-    public Tank(int x, int y, Direction dir, Group group, TankFrame tf) {
+    public DoodleTank(int x, int y, Direction dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -63,8 +60,13 @@ public class Tank extends BaseTank {
         if (moving)
             move();
 
-        g.drawImage(getTankImage(), x, y, null);
+//        g.drawImage(getTankImage(), x, y, null);
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawRect(x, y, width, height);
+        g.setColor(c);
         /*
+
         // time to fire
 
          only enemy to fire
@@ -80,7 +82,7 @@ public class Tank extends BaseTank {
     private void checkBorder() {
 
         if (x < 0) {
-           x = 0;
+            x = 0;
         }
         if (x > TankFrame.GAME_WIDTH - width) {
             x = TankFrame.GAME_WIDTH - width;
@@ -217,7 +219,7 @@ public class Tank extends BaseTank {
     public void die() {
         this.alive = false;
         //when tank dies, add Explodes!
-        tf.explodes.add(tf.af.createExplode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, tf));
+        tf.explodes.add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, tf));
         this.tf.getEnemies().remove(this);
     }
 
@@ -230,6 +232,3 @@ public class Tank extends BaseTank {
     }
 
 }
-
-
-

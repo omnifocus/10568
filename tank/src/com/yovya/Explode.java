@@ -8,7 +8,7 @@ import java.awt.*;
  * @Description: com.yovya
  * @version: 1.0
  */
-public class Explode {
+public class Explode extends BaseExplode {
     private int x, y;
     private TankFrame tf;
     private int step = 0;
@@ -30,7 +30,7 @@ public class Explode {
     public void paint(Graphics g) {
         if (step >= ResourceMgr.exImages.length) {
 //            step = 0;
-            this.tf.getExplodes().remove(this);
+            this.tf.explodes.remove(this);
         } else {
             g.drawImage(ResourceMgr.exImages[step++],x,y,null);
         }
