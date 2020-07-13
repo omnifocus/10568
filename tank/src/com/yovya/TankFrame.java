@@ -99,7 +99,6 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
 
-
         gm.paint(g);
 
 

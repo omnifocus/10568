@@ -161,7 +161,7 @@ public class Tank extends GameObject {
 
         // when adding bullet, we have to decide it's the same group as the current Tank
         //this.getGroup()
-        GameModel.getInstance().gos.add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup()));
+        new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup());
     }
 
 
@@ -224,7 +224,7 @@ public class Tank extends GameObject {
     public void die() {
         this.alive = false;
         //when tank dies, add Explodes!
-        GameModel.getInstance().gos.add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2));
+        new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2);
         GameModel.getInstance().gos.remove(this);
     }
 

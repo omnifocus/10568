@@ -10,9 +10,25 @@ import java.util.ArrayList;
  * @version: 1.0
  */
 public class GameModel {
-    private static GameModel gm = new GameModel();
+    private static GameModel gm;
+    ColliderChain chain;
+    Tank mainTank;
+
+    static {
+        gm = new GameModel();
+        gm.init();
+    }
 
     private GameModel() {
+
+    }
+
+    public static GameModel getInstance() {
+        return gm;
+    }
+
+    private void init() {
+        mainTank = new Tank(300, 400, Direction.UP, Group.GOOD);
         //read initialCount from config
         int initialCount = Integer.parseInt(PropertyMgr.getProperties("initialTankCount"));
         // add enemy tanks
@@ -20,17 +36,14 @@ public class GameModel {
         for (int i = 0; i < initialCount; i++) {
             new Tank(30 + i * 100, 100, Direction.DOWN, Group.BAD);
         }
-        chain = new ColliderChain();
+
         new Wall(100, 30);
+        chain = new ColliderChain();
     }
 
-    public static GameModel getInstance() {
-        return gm;
-    }
+
 
     ArrayList<GameObject> gos = new ArrayList<>();
-    Tank mainTank = new Tank(300, 400, Direction.UP, Group.GOOD);
-    ColliderChain chain;
 
 
     void addObject(GameObject go) {
@@ -38,10 +51,16 @@ public class GameModel {
     }
 
     public void paint(Graphics g) {
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("objects: " + gos.size(), 30, 40);
+        g.setColor(c);
+
+        mainTank.paint(g);
         for (int i = 0; i < gos.size(); i++) {
             gos.get(i).paint(g);
         }
-        mainTank.paint(g);
+
 
         for (int i = 0; i < gos.size(); i++) {
             for (int j = i + 1; j < gos.size(); j++) {
