@@ -32,7 +32,9 @@ public class Decorator extends GameObject {
 
             return;
         }
-
+        // extract to parent
+        x = go.x;
+        y = go.y;
         go.paint(g);
 
 

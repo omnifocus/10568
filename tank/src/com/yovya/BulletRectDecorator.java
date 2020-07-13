@@ -16,8 +16,7 @@ public class BulletRectDecorator extends BulletDecorator {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        x = go.x;
-        y = go.y;
+
         Color c = g.getColor();
         g.setColor(Color.YELLOW);
         g.drawRect(go.x, go.y, go.getW(), go.getH());
