@@ -9,20 +9,21 @@ package com.yovya;
 public class BulletTankCollider implements Collider {
     @Override
     public boolean doCollide(GameObject o1, GameObject o2) {
-        if (o1 instanceof Bullet && o2 instanceof Tank) {
+        if (o1 instanceof BulletDecorator && o2 instanceof TankDecorator) {
             //same group, can't fire
-            Bullet bullet = (Bullet) o1;
-            Tank tank = (Tank) o2;
-            if (bullet.group == tank.group) {
+            BulletDecorator bullet = (BulletDecorator) o1;
+            TankDecorator tank = (TankDecorator) o2;
+            if (bullet.getGroup() == tank.group) {
                 return true;
             }
-            if (bullet.rectangle.intersects(tank.getRectangle())) {
-                bullet.die();
+            if (bullet.getRectangle().intersects(tank.getRectangle())) {
                 tank.die();
+                bullet.die();
+
                 return false;
             }
             return false;
-        } else if (o1 instanceof Tank && o2 instanceof Bullet) {
+        } else if (o1 instanceof TankDecorator && o2 instanceof BulletDecorator) {
             return doCollide(o2, o1);
         }
         return true;

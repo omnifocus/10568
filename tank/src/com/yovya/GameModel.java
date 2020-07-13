@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class GameModel {
     private static GameModel gm;
     ColliderChain chain;
-    Tank mainTank;
+    TankDecorator mainTank;
 
     static {
         gm = new GameModel();
@@ -28,13 +28,13 @@ public class GameModel {
     }
 
     private void init() {
-        mainTank = new Tank(300, 400, Direction.UP, Group.GOOD);
+        mainTank = new TankDecorator(new Tank(300, 400, Direction.UP, Group.GOOD));
         //read initialCount from config
         int initialCount = Integer.parseInt(PropertyMgr.getProperties("initialTankCount"));
         // add enemy tanks
 
         for (int i = 0; i < initialCount; i++) {
-            new Tank(30 + i * 100, 100, Direction.DOWN, Group.BAD);
+            new TankDecorator(new Tank(30 + i * 100, 100, Direction.DOWN, Group.BAD));
         }
 
         new Wall(100, 30);

@@ -9,7 +9,22 @@ import java.awt.*;
  * @version: 1.0
  */
 public abstract class GameObject {
-    int x, y;
+    public int x, y;
+    public int w, h;
+    public Group group;
+    public Rectangle rectangle;
+    public boolean alive = true;
 
     abstract void paint(Graphics g);
+
+    public void die() {
+    }
+
+    public int getW() {
+        return w;
+    }
+
+    public int getH() {
+        return h;
+    }
 }

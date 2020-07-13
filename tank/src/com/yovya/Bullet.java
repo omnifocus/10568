@@ -11,22 +11,18 @@ import java.awt.image.BufferedImage;
  * @version: 1.0
  */
 public class Bullet extends GameObject {
-    int x = 50, y = 50;
-    public static final int BULLETWIDTH = ResourceMgr.bulletU.getWidth(), BULLETHEIGHT = ResourceMgr.bulletU.getHeight();
     final int SPEED = 10;
     Direction dir = Direction.DOWN;
-    boolean alive = true;
-    Group group = Group.BAD;
-
-    Rectangle rectangle;
 
 
     public Bullet(int x, int y, Direction dir, Group group) {
+        this.w = ResourceMgr.bulletU.getWidth();
+        this.h = ResourceMgr.bulletU.getHeight();
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.rectangle = new Rectangle(x, y, BULLETWIDTH, BULLETHEIGHT);
+        this.rectangle = new Rectangle(x, y, w, h);
         GameModel.getInstance().addObject(this);
     }
 

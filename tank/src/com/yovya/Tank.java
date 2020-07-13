@@ -11,19 +11,14 @@ import java.util.Random;
  * @version: 1.0
  */
 public class Tank extends GameObject {
-    int x = 50, y = 50;
-    int width = ResourceMgr.mainTankU.getWidth(), height = ResourceMgr.mainTankU.getHeight();
     Direction dir = Direction.UP;
     final int SPEED = 5;
 
-    private boolean alive = true;
-    Group group = Group.BAD;
-    private boolean moving = true;
+    public boolean moving = true;
 
     // every 3 step change pic
     private int step = 0;
 
-    Rectangle rectangle;
 
     private Random random = new Random();
 
@@ -38,12 +33,14 @@ public class Tank extends GameObject {
     }
 
     public Tank(int x, int y, Direction dir, Group group) {
+        this.w = ResourceMgr.mainTankU.getWidth();
+        this.h = ResourceMgr.mainTankU.getHeight();
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
         this.moving = group == Group.BAD ? true : false;
-        this.rectangle = new Rectangle(x, y, width, height);
+        this.rectangle = new Rectangle(x, y, w, h);
         GameModel.getInstance().addObject(this);
 
     }
@@ -54,8 +51,6 @@ public class Tank extends GameObject {
 
             return;
         }
-
-        checkBorder();
 
         g.drawImage(getTankImage(), x, y, null);
         // if moving , then redraw
@@ -81,16 +76,16 @@ public class Tank extends GameObject {
         if (x < 0) {
             x = 0;
         }
-        if (x > TankFrame.GAME_WIDTH - width) {
-            x = TankFrame.GAME_WIDTH - width;
+        if (x > TankFrame.GAME_WIDTH - w) {
+            x = TankFrame.GAME_WIDTH - w;
         }
 
         if (y < 20) {
             y = 20;
         }
 
-        if (y > TankFrame.GAME_HEIGHT - height) {
-            y = TankFrame.GAME_HEIGHT - height;
+        if (y > TankFrame.GAME_HEIGHT - h) {
+            y = TankFrame.GAME_HEIGHT - h;
         }
     }
 
@@ -130,7 +125,7 @@ public class Tank extends GameObject {
         // after move, decide next dir
         // not the mainTank
         // give it an opportunity to change Direction
-        if (group != Group.GOOD && random.nextInt(100) > 95)
+        if (group != Group.GOOD && random.nextInt(80) > 30)
             dir = randomDir();
 
 
@@ -161,7 +156,7 @@ public class Tank extends GameObject {
 
         // when adding bullet, we have to decide it's the same group as the current Tank
         //this.getGroup()
-        new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup());
+        new BulletRectDecorator(new BulletTailDecorator(new Bullet(x + w / 2 - ResourceMgr.bulletU.getWidth() / 2, y + h / 2 - ResourceMgr.bulletU.getHeight() / 2, dir, this.getGroup())));
     }
 
 
@@ -169,13 +164,7 @@ public class Tank extends GameObject {
         return rectangle;
     }
 
-    public boolean isAlive() {
-        return alive;
-    }
 
-    public void setAlive(boolean alive) {
-        this.alive = alive;
-    }
 
     private BufferedImage getTankImage() {
         BufferedImage image = null;
@@ -224,7 +213,7 @@ public class Tank extends GameObject {
     public void die() {
         this.alive = false;
         //when tank dies, add Explodes!
-        new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2);
+        new Explode(x + w / 2 - ResourceMgr.exImages[0].getWidth() / 2, y + h / 2 - ResourceMgr.exImages[0].getHeight() / 2);
         GameModel.getInstance().gos.remove(this);
     }
 

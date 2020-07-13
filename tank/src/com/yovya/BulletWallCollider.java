@@ -10,7 +10,7 @@ package com.yovya;
 public class BulletWallCollider implements Collider {
     @Override
     public boolean doCollide(GameObject o1, GameObject o2) {
-        if (o1 instanceof Bullet && o2 instanceof Wall) {
+        if (o1 instanceof BulletDecorator && o2 instanceof Wall) {
             Bullet bullet = (Bullet) o1;
             Wall wall = (Wall) o2;
             if (bullet.getRectangle().intersects(wall.getRectangle())) {
