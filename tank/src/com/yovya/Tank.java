@@ -98,8 +98,10 @@ public class Tank extends GameObject {
     public boolean doCollide(Tank tank) {
         if (getRectangle().intersects(tank.getRectangle())) {
             goBack();
-            tank.x = tank.prevX;
-            tank.y = tank.prevY;
+            //!! not using oop
+//            tank.x = tank.prevX;
+//            tank.y = tank.prevY;
+            tank.goBack();
             return true;
         }
         return false;
