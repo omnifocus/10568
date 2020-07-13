@@ -11,15 +11,15 @@ import java.awt.image.BufferedImage;
  * @version: 1.0
  */
 public class Bullet extends GameObject {
-    private int x = 50, y = 50;
+    int x = 50, y = 50;
     public static final int BULLETWIDTH = ResourceMgr.bulletU.getWidth(), BULLETHEIGHT = ResourceMgr.bulletU.getHeight();
-    private final int SPEED = 10;
-    private Direction dir = Direction.DOWN;
-    private GameModel gm;
-    private boolean alive = true;
-    private Group group = Group.BAD;
+    final int SPEED = 10;
+    Direction dir = Direction.DOWN;
+    GameModel gm;
+    boolean alive = true;
+    Group group = Group.BAD;
 
-    private Rectangle rectangle;
+    Rectangle rectangle;
 
 
     public Bullet(int x, int y, Direction dir, Group group, GameModel gm) {
@@ -79,20 +79,6 @@ public class Bullet extends GameObject {
         }
     }
 
-    public boolean doCollide(Tank enemy) {
-        //same group, can't fire
-        if (this.group == enemy.getGroup()) {
-            return false;
-        }
-        if (this.rectangle.intersects(enemy.getRectangle())) {
-            this.die();
-            //enemy.setAlive(false);
-            //I don't know if there's the field
-            enemy.die();
-            return true;
-        }
-        return false;
-    }
 
     public void die() {
         this.setAlive(false);

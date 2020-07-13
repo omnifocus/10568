@@ -15,7 +15,7 @@ public class GameModel {
     ColliderChain chain;
 
     public GameModel() {
-        addObject(mainTank);
+//        addObject(mainTank);
 
         //read initialCount from config
         int initialCount = Integer.parseInt(PropertyMgr.getProperties("initialTankCount"));
@@ -36,6 +36,7 @@ public class GameModel {
         for (int i = 0; i < gos.size(); i++) {
             gos.get(i).paint(g);
         }
+        mainTank.paint(g);
 
         for (int i = 0; i < gos.size(); i++) {
             for (int j = i + 1; j < gos.size(); j++) {

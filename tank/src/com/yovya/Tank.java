@@ -18,13 +18,13 @@ public class Tank extends GameObject {
 
     private GameModel gm;
     private boolean alive = true;
-    private Group group = Group.BAD;
+    Group group = Group.BAD;
     private boolean moving = true;
 
     // every 3 step change pic
     private int step = 0;
 
-    private Rectangle rectangle;
+    Rectangle rectangle;
 
     private Random random = new Random();
 
@@ -94,18 +94,6 @@ public class Tank extends GameObject {
         }
     }
 
-    /*each goes back if collide with another Tank*/
-    public boolean doCollide(Tank tank) {
-        if (getRectangle().intersects(tank.getRectangle())) {
-            goBack();
-            //!! not using oop
-//            tank.x = tank.prevX;
-//            tank.y = tank.prevY;
-            tank.goBack();
-            return true;
-        }
-        return false;
-    }
 
     public void goBack() {
         this.x = prevX;
