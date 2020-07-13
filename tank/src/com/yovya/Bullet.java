@@ -15,19 +15,17 @@ public class Bullet extends GameObject {
     public static final int BULLETWIDTH = ResourceMgr.bulletU.getWidth(), BULLETHEIGHT = ResourceMgr.bulletU.getHeight();
     final int SPEED = 10;
     Direction dir = Direction.DOWN;
-    GameModel gm;
     boolean alive = true;
     Group group = Group.BAD;
 
     Rectangle rectangle;
 
 
-    public Bullet(int x, int y, Direction dir, Group group, GameModel gm) {
+    public Bullet(int x, int y, Direction dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
         this.rectangle = new Rectangle(x, y, BULLETWIDTH, BULLETHEIGHT);
 
     }
@@ -83,7 +81,7 @@ public class Bullet extends GameObject {
     public void die() {
         this.setAlive(false);
         //once die, remove from tf immediately
-        this.gm.gos.remove(this);
+        GameModel.getInstance().gos.remove(this);
     }
 
 

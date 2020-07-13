@@ -18,7 +18,7 @@ import java.util.Collection;
 public class TankFrame extends Frame {
     public static final int GAME_WIDTH = 1200, GAME_HEIGHT = 600;
 
-    GameModel gm = new GameModel();
+    GameModel gm = GameModel.getInstance();
 
 
     public TankFrame() throws HeadlessException {

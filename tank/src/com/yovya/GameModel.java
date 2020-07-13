@@ -10,13 +10,9 @@ import java.util.ArrayList;
  * @version: 1.0
  */
 public class GameModel {
-    ArrayList<GameObject> gos = new ArrayList<>();
-    Tank mainTank = new Tank(300, 400, Direction.UP, Group.GOOD, this);
-    ColliderChain chain;
+    private static GameModel gm = new GameModel();
 
-    public GameModel() {
-//        addObject(mainTank);
-
+    private GameModel() {
         //read initialCount from config
         int initialCount = Integer.parseInt(PropertyMgr.getProperties("initialTankCount"));
         // add enemy tanks
@@ -27,6 +23,15 @@ public class GameModel {
         chain = new ColliderChain();
         gos.add(new Wall(100, 30));
     }
+
+    public static GameModel getInstance() {
+        return gm;
+    }
+
+    ArrayList<GameObject> gos = new ArrayList<>();
+    Tank mainTank = new Tank(300, 400, Direction.UP, Group.GOOD, this);
+    ColliderChain chain;
+
 
     void addObject(GameObject go) {
         gos.add(go);

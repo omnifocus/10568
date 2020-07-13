@@ -13,12 +13,10 @@ public class Explode extends GameObject {
     private TankFrame tf;
     private int step = 0;
     public static final int EXPLODEHEIGHT = ResourceMgr.exImages[0].getHeight(), EXPLODEWIDTH = ResourceMgr.exImages[0].getWidth();
-    GameModel gm;
 
-    public Explode(int x, int y, GameModel gm) {
+    public Explode(int x, int y) {
         this.x = x;
         this.y = y;
-        this.gm = gm;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -31,7 +29,7 @@ public class Explode extends GameObject {
     public void paint(Graphics g) {
         if (step >= ResourceMgr.exImages.length) {
 //            step = 0;
-            this.gm.gos.remove(this);
+            GameModel.getInstance().gos.remove(this);
         } else {
             g.drawImage(ResourceMgr.exImages[step++],x,y,null);
         }

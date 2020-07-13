@@ -16,7 +16,6 @@ public class Tank extends GameObject {
     Direction dir = Direction.UP;
     final int SPEED = 5;
 
-    private GameModel gm;
     private boolean alive = true;
     Group group = Group.BAD;
     private boolean moving = true;
@@ -43,7 +42,6 @@ public class Tank extends GameObject {
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
         this.moving = group == Group.BAD ? true : false;
         this.rectangle = new Rectangle(x, y, width, height);
     }
@@ -161,7 +159,7 @@ public class Tank extends GameObject {
 
         // when adding bullet, we have to decide it's the same group as the current Tank
         //this.getGroup()
-        gm.gos.add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup(), gm));
+        GameModel.getInstance().gos.add(new Bullet(x + width / 2 - Bullet.BULLETWIDTH / 2, y + height / 2 - Bullet.BULLETHEIGHT / 2, dir, this.getGroup()));
     }
 
 
@@ -224,8 +222,8 @@ public class Tank extends GameObject {
     public void die() {
         this.alive = false;
         //when tank dies, add Explodes!
-        gm.gos.add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2, gm));
-        this.gm.gos.remove(this);
+        GameModel.getInstance().gos.add(new Explode(x + width / 2 - Explode.EXPLODEWIDTH / 2, y + height / 2 - Explode.EXPLODEHEIGHT / 2));
+        GameModel.getInstance().gos.remove(this);
     }
 
     public Group getGroup() {
