@@ -17,6 +17,8 @@ public class Explode extends GameObject {
     public Explode(int x, int y) {
         this.x = x;
         this.y = y;
+        GameModel.getInstance().addObject(this);
+
         new Thread(new Runnable() {
             @Override
             public void run() {

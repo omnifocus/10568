@@ -18,10 +18,10 @@ public class GameModel {
         // add enemy tanks
 
         for (int i = 0; i < initialCount; i++) {
-            addObject(new Tank(30 + i * 100, 100, Direction.DOWN, Group.BAD, this));
+            new Tank(30 + i * 100, 100, Direction.DOWN, Group.BAD);
         }
         chain = new ColliderChain();
-        gos.add(new Wall(100, 30));
+        new Wall(100, 30);
     }
 
     public static GameModel getInstance() {
@@ -29,7 +29,7 @@ public class GameModel {
     }
 
     ArrayList<GameObject> gos = new ArrayList<>();
-    Tank mainTank = new Tank(300, 400, Direction.UP, Group.GOOD, this);
+    Tank mainTank = new Tank(300, 400, Direction.UP, Group.GOOD);
     ColliderChain chain;
 
 

@@ -37,13 +37,15 @@ public class Tank extends GameObject {
 
     }
 
-    public Tank(int x, int y, Direction dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Direction dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
         this.moving = group == Group.BAD ? true : false;
         this.rectangle = new Rectangle(x, y, width, height);
+        GameModel.getInstance().addObject(this);
+
     }
 
     public void paint(Graphics g) {

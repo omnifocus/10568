@@ -27,7 +27,7 @@ public class Bullet extends GameObject {
         this.dir = dir;
         this.group = group;
         this.rectangle = new Rectangle(x, y, BULLETWIDTH, BULLETHEIGHT);
-
+        GameModel.getInstance().addObject(this);
     }
 
     public Bullet() {
