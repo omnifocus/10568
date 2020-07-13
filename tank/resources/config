@@ -1,3 +1,5 @@
 initialTankCount=10
 #colliders
-colliders=com.yovya.BulletWallCollider,com.yovya.TankWallCollider,com.yovya.TankTankCollider,com.yovya.BulletTankCollider
+#colliderChain
+testColliderChain=com.yovya.BulletTankCollider,com.yovya.TankTankCollider,com.yovya.TankWallCollider
+colliders=com.yovya.BulletWallCollider,com.yovya.TestColliderChain
