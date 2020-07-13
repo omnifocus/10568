@@ -25,6 +25,7 @@ public class GameModel {
             addObject(new Tank(30 + i * 100, 100, Direction.DOWN, Group.BAD, this));
         }
         chain = new ColliderChain();
+        gos.add(new Wall(100, 30));
     }
 
     void addObject(GameObject go) {

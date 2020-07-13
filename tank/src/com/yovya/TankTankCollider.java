@@ -8,11 +8,13 @@ package com.yovya;
  */
 public class TankTankCollider implements Collider {
     @Override
-    public void collide(GameObject o1, GameObject o2) {
+    public boolean doCollide(GameObject o1, GameObject o2) {
         if (o1 instanceof Tank && o2 instanceof Tank) {
-            ((Tank) o1).collide((Tank) o2);
-        } else {
-            return;
+            ((Tank) o1).doCollide((Tank) o2);
+            // if collide, not return false
+            return true;
         }
+        return true;
+
     }
 }

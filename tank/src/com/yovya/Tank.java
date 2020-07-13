@@ -95,15 +95,20 @@ public class Tank extends GameObject {
     }
 
     /*each goes back if collide with another Tank*/
-    public void doCollide(Tank tank) {
+    public boolean doCollide(Tank tank) {
         if (getRectangle().intersects(tank.getRectangle())) {
-            this.x = prevX;
-            this.y = prevY;
+            goBack();
             tank.x = tank.prevX;
             tank.y = tank.prevY;
-
-
+            return true;
         }
+        return false;
+    }
+
+    public void goBack() {
+        this.x = prevX;
+        this.y = prevY;
+
     }
 
     private void move() {

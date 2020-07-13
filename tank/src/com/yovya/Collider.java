@@ -7,5 +7,6 @@ package com.yovya;
  * @version: 1.0
  */
 public interface Collider {
+    // true means can carry on
     boolean doCollide(GameObject o1, GameObject o2);
 }

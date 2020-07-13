@@ -16,6 +16,7 @@ public class ResourceMgr {
     public static BufferedImage mainTankU, mainTankD, mainTankL, mainTankR;
     public static BufferedImage main2TankU, main2TankD, main2TankL, main2TankR;
     public static BufferedImage bulletU, bulletD, bulletL, bulletR;
+    public static BufferedImage wall;
     //should not be put inside Bullet, but as only one asset
     public static BufferedImage[] exImages = new BufferedImage[16];
 
@@ -61,6 +62,8 @@ public class ResourceMgr {
             exImages[14] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e15.gif"));
             exImages[15] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e16.gif"));
 
+
+            wall = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/square0.jpg"));
 
         } catch (IOException e) {
             e.printStackTrace();

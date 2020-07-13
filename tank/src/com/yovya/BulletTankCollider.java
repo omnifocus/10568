@@ -14,6 +14,6 @@ public class BulletTankCollider implements Collider {
         } else if (o1 instanceof Tank && o2 instanceof Bullet) {
             return !((Bullet) o2).doCollide((Tank) o1);
         }
-        return false;
+        return true;
     }
 }
