@@ -52,7 +52,9 @@ public class TankDecorator extends Decorator {
 //        Tank tank = (Tank) super.go;
 //        tank.fire();
         for (TankObserver observer : observers) {
-            observer.fire(new FireEvent(System.currentTimeMillis(), this));
+            // create only one event ,and pass it to all observers
+            FireEvent fireEvent = new FireEvent(System.currentTimeMillis(), this);
+            observer.fire(fireEvent);
         }
     }
 
