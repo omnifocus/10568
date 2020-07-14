@@ -1,6 +1,10 @@
 package com.yovya;
 
+import com.yovya.observer.*;
+
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * @author: omnifocus
@@ -11,11 +15,18 @@ import java.awt.*;
 public class TankDecorator extends Decorator {
     public Direction dir;
     public boolean moving = true;
+    ArrayList<TankObserver> observers;
 
     public TankDecorator(Tank go) {
         super(go);
         dir = go.dir;
         moving = go.isMoving();
+        //register observers
+        observers = new ArrayList<>();
+        observers.add(new FireUp());
+        observers.add(new FireDown());
+        observers.add(new FireLeft());
+        observers.add(new FireRight());
     }
 
     @Override
@@ -37,8 +48,12 @@ public class TankDecorator extends Decorator {
     }
 
     public void fire() {
-        Tank tank = (Tank) super.go;
-        tank.fire();
+
+//        Tank tank = (Tank) super.go;
+//        tank.fire();
+        for (TankObserver observer : observers) {
+            observer.fire(new FireEvent(System.currentTimeMillis(), this));
+        }
     }
 
     public void goBack() {

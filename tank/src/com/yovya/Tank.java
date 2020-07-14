@@ -1,7 +1,12 @@
 package com.yovya;
 
+import com.yovya.observer.*;
+import observer.Observer;
+
 import java.awt.*;
+import java.awt.desktop.FilesEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -25,6 +30,8 @@ public class Tank extends GameObject {
     // original main Tank position
     private int prevX = 300, prevY = 400;
 
+    ArrayList<TankObserver> observers;
+
     private Direction randomDir() {
         int len = Direction.values().length;
 
@@ -42,6 +49,7 @@ public class Tank extends GameObject {
         this.moving = group == Group.BAD ? true : false;
         this.rectangle = new Rectangle(x, y, w, h);
         GameModel.getInstance().addObject(this);
+
 
     }
 
@@ -150,13 +158,8 @@ public class Tank extends GameObject {
     }
 
     public void fire() {
-        /**
-         * show a bullet from tank
-         */
-
-        // when adding bullet, we have to decide it's the same group as the current Tank
-        //this.getGroup()
         new BulletRectDecorator(new BulletTailDecorator(new Bullet(x + w / 2 - ResourceMgr.bulletU.getWidth() / 2, y + h / 2 - ResourceMgr.bulletU.getHeight() / 2, dir, this.getGroup())));
+
     }
 
 
