@@ -158,7 +158,9 @@ public class Tank extends GameObject {
     }
 
     public void fire() {
-        new BulletRectDecorator(new BulletTailDecorator(new Bullet(x + w / 2 - ResourceMgr.bulletU.getWidth() / 2, y + h / 2 - ResourceMgr.bulletU.getHeight() / 2, dir, this.getGroup())));
+        // get bullet from the bullet pool
+        Bullet bullet = Bullet.getBullet(x + w / 2 - ResourceMgr.bulletU.getWidth() / 2, y + h / 2 - ResourceMgr.bulletU.getHeight() / 2, dir, this.getGroup());
+        new BulletRectDecorator(new BulletTailDecorator(bullet));
 
     }
 

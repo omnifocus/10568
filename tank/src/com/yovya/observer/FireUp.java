@@ -12,6 +12,7 @@ public class FireUp implements TankObserver {
     @Override
     public void fire(FireEvent event) {
         TankDecorator td = event.source;
-        new BulletTailDecorator(new Bullet(td.x + td.getW() / 2 - ResourceMgr.bulletU.getWidth() / 2, td.y + td.getH() / 2 - ResourceMgr.bulletU.getHeight() / 2, Direction.UP, Group.GOOD));
+        Bullet bullet = Bullet.getBullet(td.x + td.getW() / 2 - ResourceMgr.bulletU.getWidth() / 2, td.y + td.getH() / 2 - ResourceMgr.bulletU.getHeight() / 2, Direction.UP, Group.GOOD);
+        new BulletTailDecorator(bullet);
     }
 }

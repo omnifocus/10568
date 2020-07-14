@@ -1,4 +1,4 @@
-package composite;
+package composite_flyweight;
 
 /**
  * @author: omnifocus
