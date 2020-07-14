@@ -51,6 +51,7 @@ public class TankDecorator extends Decorator {
 
 //        Tank tank = (Tank) super.go;
 //        tank.fire();
+        if (!alive) return;
         for (TankObserver observer : observers) {
             // create only one event ,and pass it to all observers
             FireEvent fireEvent = new FireEvent(System.currentTimeMillis(), this);
