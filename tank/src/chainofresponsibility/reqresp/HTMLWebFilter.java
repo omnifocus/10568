@@ -9,6 +9,9 @@ package chainofresponsibility.reqresp;
 public class HTMLWebFilter implements WebFilter {
     @Override
     public void doFilter(Request req, Response rep, FilterChain chain) {
+        if (req.reqStr.contains("<")) {
+            return;
+        }
         req.reqStr = req.reqStr.replace("<", "[").replace(">", "]");
         System.out.println("HTMLWebFilter.doFilter");
         chain.doFilter(req, rep, chain);

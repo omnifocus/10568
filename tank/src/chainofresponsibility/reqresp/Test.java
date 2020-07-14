@@ -9,7 +9,7 @@ package chainofresponsibility.reqresp;
 public class Test {
     public static void main(String[] args) {
         FilterChain fc = new FilterChain();
-        fc.addFilter(new HTMLWebFilter()).addFilter(new SensitiveWebFilter()).addFilter(new CharacterEmotionWebFilter());
+        fc.addFilter(new CharacterEmotionWebFilter()).addFilter(new SensitiveWebFilter()).addFilter(new HTMLWebFilter());
         Request req = new Request();
         req.reqStr = "<a>天朝:)</a>";
         Response rep = new Response();

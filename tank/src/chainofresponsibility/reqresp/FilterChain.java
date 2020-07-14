@@ -1,7 +1,5 @@
 package chainofresponsibility.reqresp;
 
-import chainofresponsibility.Filter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,5 +24,6 @@ public class FilterChain implements WebFilter {
     public void doFilter(Request req, Response rep, FilterChain chain) {
         if (step >= filters.size()) return;
         filters.get(step++).doFilter(req, rep, chain);
+
     }
 }
