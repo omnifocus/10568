@@ -1,10 +1,8 @@
 package com.yovya;
 
-import com.yovya.observer.*;
-import observer.Observer;
+import com.yovya.observer.TankObserver;
 
 import java.awt.*;
-import java.awt.desktop.FilesEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;

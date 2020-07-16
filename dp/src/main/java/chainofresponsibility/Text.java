@@ -1,9 +1,5 @@
 package chainofresponsibility;
 
-import observer.Observer;
-
-import java.util.List;
-
 /**
  * @author: omnifocus
  * @Date: 2020/7/14 9:16 PM

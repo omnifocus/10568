@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="tank" class="dynamicproxy.spring.Tank"></bean>
+    <bean id="logProxy" class="dynamicproxy.spring.LogProxy"></bean>
+
+    <!--    <aop:config >-->
+    <!--        <aop:pointcut id="onmove" expression="execution(void dynamicproxy.spring.Tank.move())"/>-->
+    <!--        <aop:aspect ref="logProxy">-->
+    <!--            <aop:before method="before" pointcut-ref="onmove"/>-->
+    <!--            <aop:after method="after" pointcut-ref="onmove"/>-->
+    <!--        </aop:aspect>-->
+    <!--    </aop:config>-->
+    <aop:aspectj-autoproxy/>
+</beans>

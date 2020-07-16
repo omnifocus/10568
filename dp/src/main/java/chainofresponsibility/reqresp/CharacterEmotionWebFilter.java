@@ -1,7 +1,5 @@
 package chainofresponsibility.reqresp;
 
-import chainofresponsibility.Filter;
-
 /**
  * @author: omnifocus
  * @Date: 2020/7/14 9:39 PM
